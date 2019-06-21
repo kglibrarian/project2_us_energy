@@ -18,7 +18,7 @@ from flask_sqlalchemy import SQLAlchemy
 ## Database Setup using SQLAlchemy
 #################################################
 ## create a connection with the database
-engine = create_engine("sqlite:///assets/db/energyData.sqlite")
+engine = create_engine("sqlite:///static/db/energyData.sqlite")
 ## reflect an existing database into a new model
 Base = automap_base()
 ## reflect the tables
