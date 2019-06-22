@@ -1,0 +1,50 @@
+Plant_Code,Plant_Name,Latitude,Longitude,Name_of_Water_Source,Primary_Purpose_NAICS_Code,Sector_Name,Grid_Voltage_kV
+826,Cove,42.514444,-111.793055,Bear River,22,Electric Utility,0
+3334,Pathfinder,43.602778,-96.638333,Big Sioux River,22,Electric Utility,0
+1589,New Boston Generating Station,42.339167,-71.035277,Boston Harbor,22,IPP Non-CHP,0
+700,Atkinson,33.8175,-84.480278,Chattahoochee River,22,Electric Utility,0
+3348,Webster IC,45.33,-97.331111,City,22,Electric Utility,0
+2190,Milltown,46.869722,-113.878055,Clark Fork River,22,Electric Utility,0
+3471,Webster,29.525833,-95.108055,Clear Lake,22,IPP Non-CHP,0
+6706,Thibodaux,29.799167,-90.809722,Cooling Tower,22,Electric Utility,0
+1360,Pineville,36.796667,-83.761388,Cumberland River,22,Electric Utility,0
+50471,Deer Park Plant,29.71,-95.112777,CWA,325,Industrial CHP,0
+2502,Waterside,40.753333,-73.975833,East River,22,Electric Utility,0
+112,Childs,34.351111,-111.700556,Fossil Creek/Natural Spring,22,Electric Utility,0
+115,Irving,34.402222,-111.617222,Fossil Creek/Natural Spring,22,Electric Utility,0
+52131,Power Station 3,29.379444,-94.916666,Gulf Coast Water Authority,32411,Industrial CHP,0
+773,Sullivan CR,48.863333,-117.345277,Harvey Creek And Sullivan Cree,22,Electric Utility,0
+646,F J Gannon,27.907222,-82.423055,Hillsborough Bay,22,Electric Utility,0
+647,Hookers Point,27.9375,-82.444444,Hillsborough Bay,22,Electric Utility,0
+6025,Collins,41.346111,-88.392777,Illinois River,22,IPP Non-CHP,0
+4264,Joes Valley Dam,39.2875,-111.266389,Joes Valley Reservoir,22,Electric Utility,0
+10474,4 AC Station,41.68,-87.426389,Lake Michigan,3311,Industrial CHP,0
+55465,Amelia Energy Center,30.0775,-94.234444,LNVRA,22,IPP Non-CHP,0
+2877,FirstEnergy Acme,41.654444,-83.515556,Maumee River,22,IPP Non-CHP,0
+1918,Minnesota Valley,44.802778,-95.526944,Minnesota River,22,Electric Utility,0
+52005,Plaquemine Operations,30.318611,-91.2325,Mississippi River,325188,Industrial CHP,0
+2078,Grand Avenue,39.105278,-94.569722,Missouri River,22,Electric Utility,0
+300,Division,32.681667,-117.120277,Municipality,22,IPP Non-CHP,0
+306,Naval Station,32.681667,-117.120277,Municipality,22,IPP Non-CHP,0
+307,North Island,32.705,-117.190277,Municipality,22,IPP Non-CHP,0
+375,Magnolia,34.178056,-118.315556,Municipality,22,Electric Utility,0
+747,Dinner Lake,27.4925,-81.435833,Municipality,22,Electric Utility,0
+3920,Steam plant,47.277778,-122.4,Municipality,22,Electric Utility,0
+6707,Naval Training Center,32.735556,-117.208333,Municipality,22,IPP Non-CHP,0
+7968,W R Clayton Plant,33.819444,-83.694444,Municipality,22,Electric Utility,0
+10857,Archer Daniels Midland Fredonia,37.5,-95.8,Municipality,311,Industrial Non-CHP,0
+50483,Bryant Sugar House,26.814167,-80.662777,Municipality,111,Industrial CHP,0
+50728,ExxonMobil Garden City Gas Plant,29.7,-91.55,Municipality,211,Industrial CHP,0
+50819,ESI Project,37.739167,-121.432222,Municipality,22,IPP Non-CHP,0
+50950,Wheelabrator Martell,38.367222,-120.804444,Municipality,321,Industrial CHP,0
+54312,Archer Daniels Midland Taylorville,39.599722,-89.3,Municipality,311,Industrial CHP,0
+59336,Palmer Renewable Energy,42.148889,-72.545278,Municipality,22,IPP Non-CHP,0
+164,Big Pine,24.579167,-81.685,NA,22,Electric Utility,0
+865,Bloom,42.057222,-87.869444,NA,22,IPP Non-CHP,0
+866,Calumet,41.713611,-87.542778,NA,22,IPP Non-CHP,0
+870,Electric Junction,41.8333,-88.0833,NA,22,IPP Non-CHP,0
+877,Lombard,41.89,-88.061667,NA,22,IPP Non-CHP,0
+882,Sabrooke,42.216944,-89.052222,NA,22,IPP Non-CHP,0
+1585,Exelon Edgar LLC,42.241544,-70.964889,NA,22,IPP Non-CHP,0
+1932,West Fairbault,44.269722,-93.290556,NA,22,Electric Utility,0
+2397,PSEG Bayonne Generating Station,40.660833,-74.085278,NA,22,IPP Non-CHP,0
