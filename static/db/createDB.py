@@ -11,7 +11,12 @@ from sqlalchemy import Column, String, Integer, Float, Date, VARCHAR
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
+from sqlalchemy import *
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.sql import *
+from datetime import datetime, timedelta
+from random import randint
 ###################################
 ## How to use this file
 ###################################
@@ -20,13 +25,7 @@ from sqlalchemy.orm import sessionmaker
 ## Open this file in the terminal and run: python createDB.py
 
 
-####################################
-## Function to Load the Database file
-####################################
 
-def Load_Data(file_name):
-    data = genfromtxt(file_name, delimiter=',', skip_header=1, converters={0: lambda s: str(s)})
-    return data.tolist()
 
 ##################################
 ## SQLAlchemy Declarative base
@@ -35,15 +34,19 @@ def Load_Data(file_name):
 # a new base class from which all mapped classes 
 # should inherit.
 
+#Create the database
+engine = create_engine('sqlite:///energyData.sqlite')
 Base = declarative_base()
 
+#https://www.freecodecamp.org/news/sqlalchemy-makes-etl-magically-easy-ab2bd0df928/
+
 ##################################
-## Create Classes 
+## Define Schema (i.e. Create Classes)
 ##################################
 #Create a class that describes each table in the database
 
-class StateEnergyConsumptionSector(Base):
-    __tablename__ = 'StateEnergyConsumptionSector'
+class Energy_consumption_sector(Base):
+    __tablename__ = 'energy_consumption_sector'
     __table_args__ = {'sqlite_autoincrement': True}
     id = Column(Integer, primary_key=True, nullable=False)
     State = Column(VARCHAR(40))
@@ -51,55 +54,110 @@ class StateEnergyConsumptionSector(Base):
     Commercial = Column(Integer)
     Industrial = Column(Integer)
     Transportation = Column(Integer)
-    
+
+class Electricity_generation_source(Base):
+    __tablename__ = 'electricity_generation_source'
+    __table_args__ = {'sqlite_autoincrement': True}
+    id = Column(Integer, primary_key=True, nullable=False)
+    State = Column(VARCHAR(40))
+    Petroleum_Fired = Column(Integer)
+    Natural_Gas_Fired = Column(Integer)
+    Coal_Fired = Column(Integer)
+    Nuclear = Column(Integer)
+    Hydroelectric = Column(Integer)
+    Nonhydroelectric_Renewables = Column(Integer)
+    		
+Energy_consumption_sector.__table__.create(bind=engine, checkfirst=True)
+Electricity_generation_source.__table__.create(bind=engine, checkfirst=True)
+
 ####################################
-## SQLAlchemy to Load CSV data into Tables
+## Extract: Use SQLAlchemy to Load CSV data into Tables
 ####################################
 #Within the if statement that will create the database using 
 # the classes that have already been described (see above)
+ 
+ 
+def load_1():
+    energy_consumption_sector_data = genfromtxt("../data/Energy_Consumption_by_Sector_2017.csv", delimiter=',', skip_header=1, converters={0: lambda s: str(s)})
+    #print(energy_consumption_sector_data)
+    return energy_consumption_sector_data.tolist()
 
-if __name__ == "__main__":
-    t = time()
+#Create the session
+session = sessionmaker()
+session.configure(bind=engine)
+s = session()
 
-    #Create the database
-    engine = create_engine('sqlite:///energyData.sqlite')
-    Base.metadata.create_all(engine)
-    
-    # Query All Records in the the Database
-    data = engine.execute("SELECT * FROM StateEnergyConsumptionSector")
-    for record in data:
+try:
+    data = load_1()
+    #print(data)
+    for i in data:
+        
+        record = Energy_consumption_sector(**{
+                    'State' : i[0],
+                    'Residential' : i[1],
+                    'Commercial' : i[2],
+                    'Industrial' : i[3],
+                    'Transportation' : i[4]
+                        })
+        #print(record)
+        s.add(record) #Add all the records
+
+    s.commit() #Attempt to commit all the records   
+#http://docs.pyexcel.org/en/latest/showcases/db_injection.html
+except:
+    s.rollback() #Rollback the changes on error
+finally:
+    s.close() #Close the connection
+#print("Time elapsed: " + str(time() - t) + " s.") #0.091s
+
+####################################
+## Extract: Use SQLAlchemy to Load CSV data into Tables
+####################################
+
+
+def load_2():
+    electricity_generation_source = genfromtxt("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Electricity_Generation_by_Source_2019.csv", delimiter=',', skip_header=1, converters={0: lambda s: str(s)})
+    print(electricity_generation_source)
+    return electricity_generation_source.tolist() 
+
+
+#Create the session
+session = sessionmaker()
+session.configure(bind=engine)
+s = session()
+
+try:
+    data_2 = load_2()
+    print(data_2)
+    for i in data_2:
+        print(i)
+        record = Electricity_generation_source(**{
+                    'State' : i[0],
+                    'Petroleum_Fired' : i[1],
+                    'Natural_Gas_Fired' : i[2],
+                    'Coal_Fired' : i[3],
+                    'Nuclear' : i[4],
+                    'Hydroelectric': i[5],
+                    'Nonhydroelectric_Renewables': i[6]
+                        })
         print(record)
+        s.add(record) #Add all the records
 
-    #Create the session
-    session = sessionmaker()
-    session.configure(bind=engine)
-    s = session()
+    s.commit() #Attempt to commit all the records   
+#http://docs.pyexcel.org/en/latest/showcases/db_injection.html
+except:
+    s.rollback() #Rollback the changes on error
+finally:
+    s.close() #Close the connection
+#print("Time elapsed: " + str(time() - t) + " s.") #0.091s
 
-    try:
-        file_name = "../data/Energy_Consumption_by_Sector_2017.csv" #sample CSV file used:  http://www.google.com/finance/historical?q=NYSE%3AT&ei=W4ikVam8LYWjmAGjhoHACw&output=csv
-        data = Load_Data(file_name) 
 
-        for i in data:
-            record = StateEnergyConsumptionSector(**{
-                'State' : i[0],
-                'Residential' : i[1],
-                'Commercial' : i[2],
-                'Industrial' : i[3],
-                'Transportation' : i[4],
-                
-            })
-            s.add(record) #Add all the records
 
-        s.commit() #Attemto commit all the records
-        
-        
-    except:
-        s.rollback() #Rollback the changes on error
-    finally:
-        s.close() #Close the connection
-        #print "Time elapsed: " + str(time() - t) + " s." #0.091s
+
+       
 
 ## This code is modified from: #https://stackoverflow.com/questions/31394998/using-sqlalchemy-to-load-csv-file-into-a-database
+
 
 #############################
 ## Creating a Database using Pandas to_SQL function
@@ -132,3 +190,90 @@ if __name__ == "__main__":
 ## .tables   ## prints a list of the tables in the db
 ## .dump     ## prints the data in the database
 ## .exit     ## to exit the db file
+
+
+######################################
+## THE CODE BELOW WORKS FOR ONE CSV ##
+######################################
+
+
+####################################
+## Function to Load the Database file
+####################################
+
+# def Load_Data(file_name):
+#     data = genfromtxt(file_name, delimiter=',', skip_header=1, converters={0: lambda s: str(s)})
+#     return data.tolist()
+
+##################################
+## SQLAlchemy Declarative base
+# ################################
+# The declarative base is a function that returns 
+# a new base class from which all mapped classes 
+# should inherit.
+
+#Base = declarative_base()
+
+##################################
+## Create Classes 
+##################################
+#Create a class that describes each table in the database
+
+# class StateEnergyConsumptionSector(Base):
+#     __tablename__ = 'StateEnergyConsumptionSector'
+#     __table_args__ = {'sqlite_autoincrement': True}
+#     id = Column(Integer, primary_key=True, nullable=False)
+#     State = Column(VARCHAR(40))
+#     Residential = Column(Integer)
+#     Commercial = Column(Integer)
+#     Industrial = Column(Integer)
+#     Transportation = Column(Integer)
+
+#####################################
+## SQLAlchemy to Load CSV data into Tables
+####################################
+#Within the if statement that will create the database using 
+# the classes that have already been described (see above)
+
+# if __name__ == "__main__":
+#     t = time()
+
+#     #Create the database
+#     engine = create_engine('sqlite:///energyData.sqlite')
+#     Base.metadata.create_all(engine)
+    
+#     # Query All Records in the the Database
+#     data = engine.execute("SELECT * FROM StateEnergyConsumptionSector")
+#     for record in data:
+#         print(record)
+
+#     #Create the session
+#     session = sessionmaker()
+#     session.configure(bind=engine)
+#     s = session()
+
+#     try:
+#         file_name = "../data/Energy_Consumption_by_Sector_2017.csv" #sample CSV file used:  http://www.google.com/finance/historical?q=NYSE%3AT&ei=W4ikVam8LYWjmAGjhoHACw&output=csv
+#         data = Load_Data(file_name) 
+
+#         for i in data:
+#             record = StateEnergyConsumptionSector(**{
+#                 'State' : i[0],
+#                 'Residential' : i[1],
+#                 'Commercial' : i[2],
+#                 'Industrial' : i[3],
+#                 'Transportation' : i[4],
+                
+#             })
+#             s.add(record) #Add all the records
+
+#         s.commit() #Attemto commit all the records
+        
+        
+#     except:
+#         s.rollback() #Rollback the changes on error
+#     finally:
+#         s.close() #Close the connection
+#         #print "Time elapsed: " + str(time() - t) + " s." #0.091s
+
+## This code is modified from: #https://stackoverflow.com/questions/31394998/using-sqlalchemy-to-load-csv-file-into-a-database

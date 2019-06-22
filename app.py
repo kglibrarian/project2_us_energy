@@ -18,7 +18,7 @@ from flask_sqlalchemy import SQLAlchemy
 ## Database Setup using SQLAlchemy
 #################################################
 ## create a connection with the database
-engine = create_engine("sqlite:///static/db/energyData.sqlite")
+engine = create_engine("sqlite:///static/db/energyData.sqlite", connect_args={'check_same_thread': False})
 ## reflect an existing database into a new model
 Base = automap_base()
 ## reflect the tables
@@ -28,7 +28,8 @@ Base.classes.keys()
 # create a "Metadata" Layer That Abstracts our SQL Database
 Base.metadata.create_all(engine)
 # Save a reference to the StateEnergyConumptionSector table as `ConsumptionSector`
-ConsumptionSector = Base.classes.StateEnergyConsumptionSector
+ConsumptionSector = Base.classes.energy_consumption_sector
+ElectricityGeneration = Base.classes.electricity_generation_source
 # Create our session (link) from Python to the DB
 session = Session(engine)
 
@@ -48,6 +49,7 @@ def home():
     return render_template("index.html")
 
 @app.route("/api/v1.0/consumptionsector")
+
 def consumptionSectors():
     # Query all states
     results = session.query(ConsumptionSector.State, 
@@ -68,7 +70,32 @@ def consumptionSectors():
         consumption_sector.append(consumption_sector_dict)
     return jsonify(consumption_sector)
     
-    
+
+@app.route("/api/v1.0/electricityGeneration")
+
+def electricityGeneration():
+    # Query all states
+    results = session.query(ElectricityGeneration.State, 
+            ElectricityGeneration.Petroleum_Fired, 
+            ElectricityGeneration.Natural_Gas_Fired, 
+            ElectricityGeneration.Coal_Fired,
+            ElectricityGeneration.Nuclear,
+            ElectricityGeneration.Hydroelectric,
+            ElectricityGeneration.Nonhydroelectric_Renewables).all()
+    #print(results)
+    # Create a dictionary from the row data and append to a list of all_passengers
+    electricity_generation = []
+    for State, Petroleum_Fired, Natural_Gas_Fired, Coal_Fired, Nuclear, Hydroelectric, Nonhydroelectric_Renewables  in results:
+        electricity_generation_dict = {}
+        electricity_generation_dict["State"] = State
+        electricity_generation_dict["Petroleum Fired"] = Petroleum_Fired
+        electricity_generation_dict["Natural Gas Fired"] = Natural_Gas_Fired
+        electricity_generation_dict["Coal Fired"] = Coal_Fired
+        electricity_generation_dict["Nuclear"] = Nuclear
+        electricity_generation_dict["Hydroelectric"] = Hydroelectric
+        electricity_generation_dict["Nonhydroelectric_Renewables"] = Nonhydroelectric_Renewables
+        electricity_generation.append(electricity_generation_dict)
+    return jsonify(electricity_generation)
     
     ####################################
     ## Connect to database using sqlite3
