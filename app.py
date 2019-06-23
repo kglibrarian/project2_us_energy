@@ -30,6 +30,8 @@ Base.metadata.create_all(engine)
 # Save a reference to the StateEnergyConumptionSector table as `ConsumptionSector`
 ConsumptionSector = Base.classes.energy_consumption_sector
 ElectricityGeneration = Base.classes.electricity_generation_source
+EnergyConsumption = Base.classes.energy_consumption_estimates
+PlantData = Base.classes.plant_data
 # Create our session (link) from Python to the DB
 session = Session(engine)
 
@@ -96,7 +98,98 @@ def electricityGeneration():
         electricity_generation_dict["Nonhydroelectric_Renewables"] = Nonhydroelectric_Renewables
         electricity_generation.append(electricity_generation_dict)
     return jsonify(electricity_generation)
+
+@app.route("/api/v1.0/energyConsumption")
+def energyConsumption():
+    # Query all states
+    results = session.query(EnergyConsumption.State, 
+            EnergyConsumption.Coal, 
+            EnergyConsumption.Natural_Gas, 
+            EnergyConsumption.Motor_Gasoline_excl_Ethanol,
+            EnergyConsumption.Distillate_Fuel_Oil,
+            EnergyConsumption.Jet_Fuel,
+            EnergyConsumption.HGL,
+            EnergyConsumption.Residual_Fuel,
+            EnergyConsumption.Other_Petroleum,
+            EnergyConsumption.Nuclear_Electric_Power,
+            EnergyConsumption.Hydroelectric_Power,
+            EnergyConsumption.Biomass,
+            EnergyConsumption.Other_Renewables,
+            EnergyConsumption.Net_Electricity_Imports,
+            EnergyConsumption.Net_Interstate_Flow_of_Electricity).all()
+    #print(results)
+    # Create a dictionary from the row data and append to a list of all_passengers
+    energy_consumption = []
     
+    for State, Coal, Natural_Gas, Motor_Gasoline_excl_Ethanol, Distillate_Fuel_Oil, Jet_Fuel, HGL, Residual_Fuel, Other_Petroleum, Nuclear_Electric_Power, Hydroelectric_Power, Biomass, Other_Renewables, Net_Electricity_Imports, Net_Interstate_Flow_of_Electricity in results:
+        energy_consumption_dict = {}
+        energy_consumption_dict["State"] = State
+        energy_consumption_dict["Coal"] = Coal
+        energy_consumption_dict["Natural_Gas"] = Natural_Gas
+        energy_consumption_dict["Motor_Gasoline_excl_Ethanol"] = Motor_Gasoline_excl_Ethanol
+        energy_consumption_dict["Distillate_Fuel_Oil"] = Distillate_Fuel_Oil
+        energy_consumption_dict["Jet_Fuel"] = Jet_Fuel
+        energy_consumption_dict["HGL"] = HGL
+        energy_consumption_dict["Residual_Fuel"] = Residual_Fuel
+        energy_consumption_dict["Other_Petroleum"] = Other_Petroleum
+        energy_consumption_dict["Nuclear_Electric_Power"] = Nuclear_Electric_Power
+        energy_consumption_dict["Hydroelectric_Power"] = Hydroelectric_Power
+        energy_consumption_dict["Biomass"] = Biomass
+        energy_consumption_dict["Other_Renewables"] = Other_Renewables
+        energy_consumption_dict["Net_Electricity_Imports"] = Net_Electricity_Imports
+        energy_consumption_dict["Net_Interstate_Flow_of_Electricity"] = Net_Interstate_Flow_of_Electricity
+        energy_consumption.append(energy_consumption_dict)
+    #print(energy_consumption)
+    return jsonify(energy_consumption)
+
+@app.route("/api/v1.0/plantData")
+def plantData():
+    # Query all states
+    results = session.query(PlantData.Utility_ID, 
+            PlantData.Utility_Name, 
+            PlantData.Plant_Code, 
+            PlantData.Plant_Name, 
+            PlantData.Street_Address, 
+            PlantData.City, 
+            PlantData.State, 
+            PlantData.Zip, 
+            PlantData.County, 
+            PlantData.Latitude, 
+            PlantData.Longitude, 
+            PlantData.Name_of_Water_Source, 
+            PlantData.Primary_Purpose_NAICS_Code, 
+            PlantData.Sector_Name,
+            PlantData.Grid_Voltage_kV).all()
+    #print(results)
+  
+    # Create a dictionary from the row data and append to a list of all_passengers
+       
+    plant_data = []
+   
+    for Utility_ID, Utility_Name, Plant_Code, Plant_Name, Street_Address, City, State, Zip, County, Latitude, Longitude, Name_of_Water_Source, Primary_Purpose_NAICS_Code, Sector_Name, Grid_Voltage_kV in results:
+        plant_data_dict = {}
+        plant_data_dict["Utility_ID"] = Utility_ID
+        plant_data_dict["Utility_Name"] = Utility_Name
+        plant_data_dict["Plant_Name"] = Plant_Name
+        plant_data_dict["Street_Address"] = Street_Address
+        plant_data_dict["City"] = City
+        plant_data_dict["State"] = State
+        plant_data_dict["Zip"] = Zip
+        plant_data_dict["County"] = County
+        plant_data_dict["Latitude"] = Latitude
+        plant_data_dict["Longitude"] = Longitude
+        plant_data_dict["Name_of_Water_Source"] = Name_of_Water_Source
+        plant_data_dict["Primary_Purpose_NAICS_Code"] = Primary_Purpose_NAICS_Code
+        plant_data_dict["Sector_Name"] = Sector_Name
+        plant_data_dict["Grid_Voltage_kV"] = Grid_Voltage_kV
+        plant_data.append(plant_data_dict)
+    #print(plant_data[1])
+    return jsonify(plant_data)
+
+
+
+
+
     ####################################
     ## Connect to database using sqlite3
     ###################################
