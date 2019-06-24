@@ -16,18 +16,7 @@ strokeWidth: 2,
 markerSymbol: '?'
 }));
 
-var scene = viewer.scene;
-var clock = viewer.clock;
-var referenceFramePrimitive;
-
-function flyToSanDiego() {
-  // Sandcastle.declare(flyToSanDiego);
-  viewer.camera.flyTo({
-      destination : Cesium.Cartesian3.fromDegrees(-117.16, 32.71, 15000.0)
-  });
-}
-
-// flyToSanDiego();
+var pinBuilder = new Cesium.PinBuilder();
 
 function flyToLocation(Location) {
   if (Location == "TX") {
@@ -53,24 +42,33 @@ function flyToLocation(Location) {
 }
 
 
-var Location = "USA";
+var Location = "TX";
 flyToLocation(Location);
 
-function wait(ms){
-  var start = new Date().getTime();
-  var end = start;
-  while(end < start + ms) {
-    end = new Date().getTime();
- }
-}
-
-function getPlantData() {
-  Cesium.Resource.fetchJson('http://127.0.0.1:5000/api/v1.0/plantData').then(function(jsonData) {
-    // Do something with the JSON object
-    console.log(jsonData);
-}).otherwise(function(error) {
-    // an error occurred
-});
-}
-
-getPlantData();
+Cesium.Resource.fetchJson('http://127.0.0.1:5000/api/v1.0/plantData').then(function(jsonData) {
+  jsonData.forEach(function(item) {
+    if (item.State == "TX") {
+      console.log(item);
+      var lat = +item.Latitude;
+      var lon = +item.Longitude;
+      var kV = +item.Grid_Voltage_kV;
+      console.log(lat, lon, kV);
+      var bluePin = viewer.entities.add({
+        name : 'Blank blue pin',
+        position : Cesium.Cartesian3.fromDegrees(lon, lat),
+        billboard : {
+            image : pinBuilder.fromColor(Cesium.Color.ROYALBLUE, 48).toDataURL(),
+            verticalOrigin : Cesium.VerticalOrigin.BOTTOM
+        }
+      });
+      // viewer.entities.add(Cesium.Cartesian3.fromDegrees(lon, lat, kV));
+      // viewer.entities.add({
+      //   name : 'Blank blue pin',
+      //   position : Cesium.Cartesian3.fromDegrees(lon, lat),
+      //   billboard : {
+      //       image : pinBuilder.fromColor(Cesium.Color.ROYALBLUE, 48),
+      //       verticalOrigin : Cesium.VerticalOrigin.BOTTOM
+      //   }
+    };
+    })
+  });
