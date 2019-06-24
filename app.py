@@ -48,6 +48,10 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+@app.route("/mina")
+def mina():
+    return render_template("mina.html")
+
 @app.route("/api/v1.0/consumptionsector")
 
 def consumptionSectors():
@@ -62,7 +66,7 @@ def consumptionSectors():
     consumption_sector = []
     for State, Residential, Commercial, Industrial, Transportation in results:
         consumption_sector_dict = {}
-        consumption_sector_dict["State"] = State
+    #    consumption_sector_dict["State"] = State
         consumption_sector_dict["Residential"] = Residential
         consumption_sector_dict["Commercial"] = Commercial
         consumption_sector_dict["Industrial"] = Industrial
@@ -87,7 +91,7 @@ def electricityGeneration():
     electricity_generation = []
     for State, Petroleum_Fired, Natural_Gas_Fired, Coal_Fired, Nuclear, Hydroelectric, Nonhydroelectric_Renewables  in results:
         electricity_generation_dict = {}
-        electricity_generation_dict["State"] = State
+        #electricity_generation_dict["State"] = State
         electricity_generation_dict["Petroleum Fired"] = Petroleum_Fired
         electricity_generation_dict["Natural Gas Fired"] = Natural_Gas_Fired
         electricity_generation_dict["Coal Fired"] = Coal_Fired
