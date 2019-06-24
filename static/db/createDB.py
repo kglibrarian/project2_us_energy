@@ -17,6 +17,12 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import *
 from datetime import datetime, timedelta
 from random import randint
+import os
+import csv
+import datetime
+import sys
+import numpy as np
+from io import StringIO
 ###################################
 ## How to use this file
 ###################################
@@ -67,8 +73,50 @@ class Electricity_generation_source(Base):
     Hydroelectric = Column(Integer)
     Nonhydroelectric_Renewables = Column(Integer)
     		
+class Energy_consumption_estimates(Base):
+    __tablename__ = 'energy_consumption_estimates'
+    __table_args__ = {'sqlite_autoincrement': True}
+    id = Column(Integer, primary_key=True, nullable=False)
+    State = Column(VARCHAR(40))
+    Coal = Column(Integer)
+    Natural_Gas = Column(Integer)
+    Motor_Gasoline_excl_Ethanol = Column(Integer)
+    Distillate_Fuel_Oil = Column(Integer)
+    Jet_Fuel = Column(Integer)
+    HGL = Column(Integer)
+    Residual_Fuel = Column(Integer)
+    Other_Petroleum = Column(Integer)
+    Nuclear_Electric_Power = Column(Integer)
+    Hydroelectric_Power = Column(Integer)
+    Biomass = Column(Integer)
+    Other_Renewables = Column(Integer)
+    Net_Electricity_Imports = Column(Integer)
+    Net_Interstate_Flow_of_Electricity = Column(Integer)
+       
+class Plant_data(Base):
+    __tablename__ = 'plant_data'
+    __table_args__ = {'sqlite_autoincrement': True}
+    id = Column(Integer, primary_key=True, nullable=False)
+    Utility_ID = Column(Integer)
+    Utility_Name = Column(VARCHAR(40))
+    Plant_Code = Column(Integer)
+    Plant_Name = Column(VARCHAR(40))
+    Street_Address = Column(VARCHAR(40))
+    City = Column(VARCHAR(40))
+    State = Column(VARCHAR(40))
+    Zip = Column(Integer)
+    County = Column(VARCHAR(40))
+    Latitude = Column(Integer)
+    Longitude = Column(Integer)
+    Name_of_Water_Source = Column(VARCHAR(40))
+    Primary_Purpose_NAICS_Code = Column(Integer)
+    Sector_Name = Column(Integer)
+    Grid_Voltage_kV = Column(Integer)
+ 
 Energy_consumption_sector.__table__.create(bind=engine, checkfirst=True)
 Electricity_generation_source.__table__.create(bind=engine, checkfirst=True)
+Energy_consumption_estimates.__table__.create(bind=engine, checkfirst=True)
+Plant_data.__table__.create(bind=engine, checkfirst=True)    
 
 ####################################
 ## Extract: Use SQLAlchemy to Load CSV data into Tables
@@ -78,9 +126,13 @@ Electricity_generation_source.__table__.create(bind=engine, checkfirst=True)
  
  
 def load_1():
-    energy_consumption_sector_data = genfromtxt("../data/Energy_Consumption_by_Sector_2017.csv", delimiter=',', skip_header=1, converters={0: lambda s: str(s)})
+    #energy_consumption_sector_data = genfromtxt("../data/Energy_Consumption_by_Sector_2017.csv", delimiter=',', skip_header=1, converters={0: lambda s: str(s)})
     #print(energy_consumption_sector_data)
-    return energy_consumption_sector_data.tolist()
+    #return energy_consumption_sector_data.tolist()
+    energy_consumption_sector_data = pd.read_csv("../data/Energy_Consumption_by_Sector_2017.csv")
+    energy_consumption_sector_data_list = energy_consumption_sector_data.values.tolist()
+    #print(energy_consumption_sector_data_list)
+    return energy_consumption_sector_data_list
 
 #Create the session
 session = sessionmaker()
@@ -116,10 +168,13 @@ finally:
 
 
 def load_2():
-    electricity_generation_source = genfromtxt("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Electricity_Generation_by_Source_2019.csv", delimiter=',', skip_header=1, converters={0: lambda s: str(s)})
-    print(electricity_generation_source)
-    return electricity_generation_source.tolist() 
-
+    #electricity_generation_source = genfromtxt("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Electricity_Generation_by_Source_2019.csv", delimiter=',', skip_header=1, converters={0: lambda s: str(s)})
+    #print(electricity_generation_source)
+    #return electricity_generation_source.tolist() 
+    electricity_generation_source = pd.read_csv("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Electricity_Generation_by_Source_2019.csv") 
+    electricity_generation_source_list = electricity_generation_source.values.tolist()
+    #print(electricity_generation_source_list)
+    return electricity_generation_source_list
 
 #Create the session
 session = sessionmaker()
@@ -128,7 +183,7 @@ s = session()
 
 try:
     data_2 = load_2()
-    print(data_2)
+    #print(data_2)
     for i in data_2:
         print(i)
         record = Electricity_generation_source(**{
@@ -140,7 +195,7 @@ try:
                     'Hydroelectric': i[5],
                     'Nonhydroelectric_Renewables': i[6]
                         })
-        print(record)
+        #print(record)
         s.add(record) #Add all the records
 
     s.commit() #Attempt to commit all the records   
@@ -151,10 +206,106 @@ finally:
     s.close() #Close the connection
 #print("Time elapsed: " + str(time() - t) + " s.") #0.091s
 
+def load_3():
+    #energy_consumption_estimates = genfromtxt("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Energy_Consumption_Estimates_2017.csv", delimiter=',', skip_header=1, converters={0: lambda s: str(s)})
+    #print(energy_consumption_estimates)
+    #return energy_consumption_estimates.tolist() 
+    energy_consumption_estimates = pd.read_csv("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Energy_Consumption_Estimates_2017.csv")
+    energy_consumption_estimates_list = energy_consumption_estimates.values.tolist()
+    #print(energy_consumption_estimates_list)
+    return energy_consumption_estimates_list
+
+#Create the session
+session = sessionmaker()
+session.configure(bind=engine)
+s = session()
+
+try:
+    data_3 = load_3()
+    #print(data_3)
+    for a in data_3:
+        #print(a)
+        
+        record_3 = Energy_consumption_estimates(**{
+                    'State' : a[0],
+                    'Coal' : a[1],
+                    'Natural_Gas' : a[2],
+                    'Motor_Gasoline_excl_Ethanol' : a[3],
+                    'Distillate_Fuel_Oil' : a[4],
+                    'Jet_Fuel': a[5],
+                    'HGL': a[6],
+                    'Residual_Fuel': a[7],
+                    'Other_Petroleum': a[8],
+                    'Nuclear_Electric_Power': a[9],
+                    'Hydroelectric_Power': a[10],
+                    'Biomass': a[11],
+                    'Other_Renewables': a[12],
+                    'Net_Electricity_Imports': a[13],
+                    'Net_Interstate_Flow_of_Electricity': a[14]
+                        })
+        #print(record_3)
+        s.add(record_3) #Add all the records
+    
+    s.commit() #Attempt to commit all the records   
+#http://docs.pyexcel.org/en/latest/showcases/db_injection.html
+except:
+     s.rollback() #Rollback the changes on error
+     print("there was an error")
+finally:
+     s.close() #Close the connection
+     print("session is closed")
+#print("Time elapsed: " + str(time() - t) + " s.") #0.091s
+
+
+def load_4():
+    #plant_data = np.genfromtxt("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Plant_Y2017_Final_Data.csv",delimiter=',', autostrip=True, skip_header=1, usecols=np.arange(0,15), invalid_raise = False, deletechars="~!@#$%^&*()-=+~\|]}[{';: /?.>,<.", dtype='unicode', converters={0: lambda s: str(s)})
+    #print(plant_data)
+    #return plant_data.tolist()
+    plant_data = pd.read_csv("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Plant_Y2017_Final_Data.csv")
+    plant_data_list = plant_data.values.tolist()
+    #print(plant_data_list)
+    return plant_data_list
+
+#Create the session
+session = sessionmaker()
+session.configure(bind=engine)
+s = session()
+
+try:
+    data_4 = load_4()
+    #print(data_4)
+    for i in data_4:
+        #print(i)
+        record_4 = Plant_data(**{
+                    'Utility_ID' : i[0],
+                    'Utility_Name' : i[1],
+                    'Plant_Code' : i[2],
+                    'Plant_Name' : i[3],
+                    'Street_Address' : i[4],
+                    'City' : i[5],
+                    'State' : i[6],
+                    'Zip' : i[7],
+                    'County' : i[8],
+                    'Latitude' : i[9],
+                    'Longitude' : i[10],
+                    'Name_of_Water_Source' : i[11],
+                    'Primary_Purpose_NAICS_Code' : i[12],
+                    'Sector_Name' : i[13],
+                    'Grid_Voltage_kV' : i[14]
+                     })
+        #print(record_4)
+        s.add(record_4) #Add all the records
+    
+    s.commit() #Attempt to commit all the records   
 
 
 
-       
+except:
+    s.rollback() #Rollback the changes on error
+    print("there was an error")
+finally:
+    s.close() #Close the connection
+    print("session is closed")       
 
 ## This code is modified from: #https://stackoverflow.com/questions/31394998/using-sqlalchemy-to-load-csv-file-into-a-database
 
