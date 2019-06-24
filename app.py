@@ -12,6 +12,7 @@ from flask import (
     jsonify,
     request,
     redirect)
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 #################################################
@@ -39,7 +40,7 @@ session = Session(engine)
 # Flask Setup
 #################################################
 app = Flask(__name__)
-
+CORS(app)
 
 #################################################
 # Flask Routes

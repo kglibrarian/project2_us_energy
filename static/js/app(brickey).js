@@ -30,8 +30,6 @@ function flyToSanDiego() {
 // flyToSanDiego();
 
 function flyToLocation(Location) {
-  // https://citylatitudelongitude.com/TX/Center.htm
-  // Sandcastle.declare(flyToTexas);
   if (Location == "TX") {
     var lon = -99.683617;
     var lat = 31.169621;
@@ -57,15 +55,6 @@ function flyToLocation(Location) {
 
 var Location = "USA";
 flyToLocation(Location);
-wait(10000);
-// var Location = "IL";
-// flyToLocation(Location);
-// wait(10000);
-// var Location = "KY";
-// flyToLocation(Location);
-// wait(10000);
-// var Location = "TX";
-// flyToLocation(Location);
 
 function wait(ms){
   var start = new Date().getTime();
@@ -75,3 +64,13 @@ function wait(ms){
  }
 }
 
+function getPlantData() {
+  Cesium.Resource.fetchJson('http://127.0.0.1:5000/api/v1.0/plantData').then(function(jsonData) {
+    // Do something with the JSON object
+    console.log(jsonData);
+}).otherwise(function(error) {
+    // an error occurred
+});
+}
+
+getPlantData();
