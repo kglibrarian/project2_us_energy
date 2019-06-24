@@ -12,7 +12,7 @@ var viewer = new Cesium.Viewer('cesiumContainer',{
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load('../static/data/gz_2010_us_040_00_500k.json', {
 stroke: Cesium.Color.BLACK,
 fill: Cesium.Color.TRANSPARENT,
-strokeWidth: 3,
+strokeWidth: 2,
 markerSymbol: '?'
 }));
 
@@ -53,9 +53,25 @@ function flyToLocation(Location) {
       destination : Cesium.Cartesian3.fromDegrees(lon,lat,zoom)
   });
 }
-var Location = "IL";
 
+
+var Location = "USA";
 flyToLocation(Location);
+wait(10000);
+// var Location = "IL";
+// flyToLocation(Location);
+// wait(10000);
+// var Location = "KY";
+// flyToLocation(Location);
+// wait(10000);
+// var Location = "TX";
+// flyToLocation(Location);
 
-
+function wait(ms){
+  var start = new Date().getTime();
+  var end = start;
+  while(end < start + ms) {
+    end = new Date().getTime();
+ }
+}
 
