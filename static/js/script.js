@@ -1,6 +1,6 @@
-// SVGオブジェクト
+// SVG object
 var $svg;
-// SVG読み込み
+// SVG read
 var loadSvgObject = function() {
     if (!$svg) {
         var svgTag = document.getElementById('svg-obj');
@@ -13,5 +13,5 @@ var loadSvgObject = function() {
 $(window).on('load', function() {
     // OK
     loadSvgObject();
-    //...処理
+    //proceeding
 });
