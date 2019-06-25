@@ -3,11 +3,14 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>State Dashboard</title>
+		<title>Kentucky State Dashboard</title>
 		<link rel="stylesheet" type="text/css" href="../static/css/style.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-	</head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+        <script src="https://cesiumjs.org/releases/1.58/Build/Cesium/Cesium.js"></script>
+        <link href="https://cesiumjs.org/releases/1.58/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    </head>
+    
 	<body>
 		<div class="container">
             <div class="row">
@@ -15,45 +18,28 @@
                 <h1>Kentucky Data Dashboard</h1>
             </div>
         </div>
-        <div id="pie"></div>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script type="text/javascript" src="../static/js/Kentucky.js"></script>
-    </div>
+        <script type="text/javascript" src="../static/js/app(brickey).js"></script>
 
-    <div id="container">
-        </div>
-          <!-- <div class="btn-wrapper">
-              <a href="#1" class="btn line">line</a>
-              <a href="#2" class="btn bar">bar</a>
-              <a href="#3" class="btn line2">bar</a>
-          </div> -->
-          <div class="hidden_box">
-              <label for="label1">button here</label>
-              <input type="checkbox" id="label1"/>
-              <div class="hidden_show">
-                <!--undisplay-->     
-                <div id="pie"></div>
-                <div id="line-elec"></div>
-                <div id="line-cons"></div>
-                <!--till here-->
-              </div>
-          </div>
-    
-          <div class="hidden_box">
-              <label for="label2">button here</label>
-              <input type="checkbox" id="label2"/>
-              <div class="hidden_show">
-                <!--undisplay-->     
-                <!--till here-->
-              </div>
-          </div>
+        <!-- Brickey -->
+        <div id="cesiumContainer" style="width: 700px; height:400px"></div>
         
-        <div class="charts-contents">
-          <!-- <div id="pie"></div>
-          <div id="line"></div> -->
-        </div>
-        
-        </body>
-    </html>
+        <script>
+          Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzN2M3YTE2YS1kOTU3LTRhMzQtYWU4Ni02YTIyYmNhODc4MTciLCJpZCI6MTI1MjUsInNjb3BlcyI6WyJhc2wiLCJhc3IiLCJhc3ciLCJnYyJdLCJpYXQiOjE1NjEyMjIzODR9.jfV2uxgm2xI3e8Sc2k6cyx2oaR9QnJtncIuNRNt3Q8k';
+          var Location = "KY";
+        </script>
+
+        <!-- Mina -->
+        <div id="contents">
+            <div id="pie"></div>
+            <div id="line-elec"></div>
+            <div id="line-cons"></div>
+        </div> 
+
+    </body>
+
+</html>

@@ -52,9 +52,9 @@ CORS(app)
 def home():
     return render_template("index.html")
 
-@app.route("/mina")
+@app.route("/Illinois")
 def mina():
-    return render_template("mina.html")
+    return render_template("Illinois.html")
 
 @app.route("/Kentucky")
 def Kentucky():
