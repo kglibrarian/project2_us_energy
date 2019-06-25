@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     padding: 0;
     margin: 0;
@@ -74,3 +75,27 @@ h1 {
   text-align: center;
 }
 
+=======
+.container {
+    margin: 20px;
+}
+.btn {
+    padding: 8px, 24px;
+    color: white;
+    display: incline-block;
+    opacity: 0.8;
+    background-color: #239b76;
+    border-radius: 4px;
+    padding: 20px 50px;
+}
+
+.btn-wrapper {
+    margin: 20px;
+    text-align: center;
+}
+
+.btn :hover{
+    opacity: 1;
+}
+  
+>>>>>>> 237947cec74e2b3a99a333fd452c3b90495d83c3
