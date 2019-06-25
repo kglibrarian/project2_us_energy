@@ -1,64 +1,53 @@
-console.log("hello out here")
-function buildPlot() {
-    /* data route */
-  var url = "/api/v1.0/consumptionsector";
-  d3.json(url).then(function(response) {
-    console.log("hello in here")
-    labels = response.keys()
-    console.log(labels)
-    console.log(response[0]);
-    console.log(response[0].Commercial)
-    console.log(response[0].key)
+//Illinois-Piechart
+function buildCharts(sample) {
+
+  // @TODO: Use `d3.json` to fetch the sample data for the plots
+  var chartsURL = "/api/v1.0/consumptionsector";
+  d3.json(chartsURL).then(function (data) {
+    var data = data[0]; 
+    ind_key = Object.keys(data);
+    ind_val = Object.values(data);
     
+    var chart = [{
+      values: ind_val,
+      labels: ind_key,
+      type: 'pie',
+    }];
 
-    var w = 960,
-    h = 500,
-    r = Math.min(w, h) / 2;
-    var color = d3.scaleLinear()
-      //.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+    Plotly.newPlot('pie', chart);
+    pio.write_image(fig, 'pie-Illinois'.png); 
+    });
+  }
+buildCharts();
 
-    data = [{"label":"Commercial", "value":response[0].Commercial}, 
-            {"label":"Industrial", "value":response[0].Industrial}, 
-            {"label":"Residential", "value":response[0].Residential},
-            {"label":"Transportation", "value":response[0].Transportation}];
-    
-    var vis = d3.select("body")
-        .append("svg:svg")              //create the SVG element inside the <body>
-        .data([data])                   //associate our data with the document
-            .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
-            .attr("height", h)
-        .append("svg:g")                //make a group to hold our pie chart
-            .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
+// Illinois-LineChart
+function buildLineCharts(sample) {
+  // @TODO: Use `d3.json` to fetch the sample data for the plots
+  var chartsURL = "/api/v1.0/electricityGeneration";
+  d3.json(chartsURL).then(function (data) {
+    var data_line = data[0]; 
+    ind_key_line = Object.keys(data_line);
+    ind_val_line = Object.values(data_line);
+  
+    var chart = [{
+      x: ind_val_line,
+      y: ind_key_line,
+      type: 'bar',
+      orientation: 'h',
+    }];
 
-    var arc = d3.arc()
-      .outerRadius(r - 10)
-      .innerRadius(0);
-      
-    var pie = d3.layout.pie()           //this will create arc data for us given a list of values
-        .value(function(d) { return d.value; });    //we must tell it out to access the value of each element in our data array
-
-    var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
-        .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
-        .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
-            .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
-                .attr("class", "slice");    //allow us to style things in the slices (like text)
-
-        arcs.append("svg:path")
-                .attr("fill", function(d, i) { return color(i); } ) //set the color for each slice to be chosen from the color function defined above
-                .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
-
-        arcs.append("svg:text")                                     //add a label to each slice
-                .attr("transform", function(d) {                    //set the label's origin to the center of the arc
-                //we have to make sure to set these before calling arc.centroid
-                d.innerRadius = 0;
-                d.outerRadius = r;
-                return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
-            })
-            .attr("text-anchor", "middle")                          //center the text on it's origin
-            .text(function(d, i) { return data[i].label; });        //get the label from our original data array
-        
-    
-  });
+    Plotly.newPlot('line', chart);
+    pio.write_image(fig, 'line-Illinois'.png); 
+    });
 }
+buildLineCharts();
 
-buildPlot();
+// var mydata = [{"Commercial":500,"Industrial":1176.2,"Residential":891.6}];
+// console.log(mydata);
+// for(var i=0;i<mydata.length;i++) {
+//   var obj = mydata[i]+[1];
+//   console.log(obj);
+// }
+
+// ind_key = console.log(Object.keys(obj));
+// ind_val = console.log(Object.values(obj));
