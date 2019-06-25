@@ -64,9 +64,9 @@ def Kentucky():
 def Texas():
     return render_template("Texas.html")
 
-@app.route("/kentucky")
-def kentucky():
-    return render_template("kentucky.html")
+@app.route("/brickey")
+def Brickey():
+    return render_template("brickey.html")
 
 @app.route("/api/v1.0/consumptionsector")
 
