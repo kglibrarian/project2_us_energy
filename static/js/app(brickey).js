@@ -42,33 +42,27 @@ function flyToLocation(Location) {
 }
 
 
-var Location = "TX";
+// var Location = "TX";
 flyToLocation(Location);
 
 Cesium.Resource.fetchJson('http://127.0.0.1:5000/api/v1.0/plantData').then(function(jsonData) {
   jsonData.forEach(function(item) {
-    if (item.State == "TX") {
+    if (item.State == Location) {
       console.log(item);
       var lat = +item.Latitude;
       var lon = +item.Longitude;
       var kV = +item.Grid_Voltage_kV;
       console.log(lat, lon, kV);
-      var bluePin = viewer.entities.add({
-        name : 'Blank blue pin',
-        position : Cesium.Cartesian3.fromDegrees(lon, lat),
-        billboard : {
-            image : pinBuilder.fromColor(Cesium.Color.ROYALBLUE, 48).toDataURL(),
-            verticalOrigin : Cesium.VerticalOrigin.BOTTOM
+      var yellowCone = viewer.entities.add({
+        name : item.Plant_Name,
+        position: Cesium.Cartesian3.fromDegrees(lon, lat, kV*100),
+        cylinder : {
+            length : kV*1250,
+            topRadius : 0.0,
+            bottomRadius : kV*100,
+            material : Cesium.Color.YELLOW
         }
-      });
-      // viewer.entities.add(Cesium.Cartesian3.fromDegrees(lon, lat, kV));
-      // viewer.entities.add({
-      //   name : 'Blank blue pin',
-      //   position : Cesium.Cartesian3.fromDegrees(lon, lat),
-      //   billboard : {
-      //       image : pinBuilder.fromColor(Cesium.Color.ROYALBLUE, 48),
-      //       verticalOrigin : Cesium.VerticalOrigin.BOTTOM
-      //   }
+    });
     };
     })
   });

@@ -1,11 +1,2 @@
-//API Keys for Mina
-var API_KEY_Mina = ""
-
-//API Keys for Karen
-var API_KEY_Karen = ""
-
-//API Keys for Brickey
-var API_KEY_Brickey = ""
-
-//API Keys for Marc
-var API_KEY_Marc = ""
+// API key for Mapbox
+const API_KEY = "pk.eyJ1IjoiaWdnaXRibGFoIiwiYSI6ImNqd3IxaHVibjFmdHE0NHQ1dHo0d2I0aDQifQ.Yif5Tiz9QHOOPscWQwMXZQ";
