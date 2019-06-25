@@ -63,22 +63,6 @@ Cesium.Resource.fetchJson('http://127.0.0.1:5000/api/v1.0/plantData').then(funct
             material : Cesium.Color.YELLOW
         }
     });
-      // var bluePin = viewer.entities.add({
-      //   name : item.Plant_Name,
-      //   position : Cesium.Cartesian3.fromDegrees(lon, lat),
-      //   billboard : {
-      //       image : pinBuilder.fromColor(Cesium.Color.YELLOW, kV*.1).toDataURL(),
-      //       verticalOrigin : Cesium.VerticalOrigin.BOTTOM
-      //   }
-      // });
-      // viewer.entities.add(Cesium.Cartesian3.fromDegrees(lon, lat, kV));
-      // viewer.entities.add({
-      //   name : 'Blank blue pin',
-      //   position : Cesium.Cartesian3.fromDegrees(lon, lat),
-      //   billboard : {
-      //       image : pinBuilder.fromColor(Cesium.Color.ROYALBLUE, 48),
-      //       verticalOrigin : Cesium.VerticalOrigin.BOTTOM
-      //   }
     };
     })
   });
