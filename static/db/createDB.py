@@ -125,11 +125,24 @@ class Energy_production(Base):
     Biofuels = Column(Integer)
     Other_Renewable_Energy = Column(Integer)
 
+class Price_differences(Base):
+    __tablename__ = 'price_differences'
+    __table_args__ = {'sqlite_autoincrement': True}
+    id = Column(Integer, primary_key=True, nullable=False)
+    State = Column(VARCHAR(40))
+    Natural_Gas_Citygate = Column(Integer)
+    Natural_Gas_Residential = Column(Integer)
+    Electricity_Residential = Column(Integer)
+    Electricity_Commercial = Column(Integer)
+    Electricity_Industrial = Column(Integer)
+
+
 Energy_consumption_sector.__table__.create(bind=engine, checkfirst=True)
 Electricity_generation_source.__table__.create(bind=engine, checkfirst=True)
 Energy_consumption_estimates.__table__.create(bind=engine, checkfirst=True)
 Plant_data.__table__.create(bind=engine, checkfirst=True)
-Energy_production.__table__.create(bind=engine, checkfirst=True)   
+Energy_production.__table__.create(bind=engine, checkfirst=True)
+Price_differences.__table__.create(bind=engine, checkfirst=True)
 
 ####################################
 ## Extract: Use SQLAlchemy to Load CSV data into Tables
@@ -363,7 +376,46 @@ finally:
     s.close() #Close the connection
     print("session is closed")
 
+def load_6():
+    #price_differences = np.genfromtxt("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Price_Differences_from_US_Average_Most_Recent_Monthly.csv",delimiter=',', autostrip=True, skip_header=1, usecols=np.arange(0,15), invalid_raise = False, deletechars="~!@#$%^&*()-=+~\|]}[{';: /?.>,<.", dtype='unicode', converters={0: lambda s: str(s)})
+    #print(price_differences)
+    #return price_differences.tolist()
+    price_differences = pd.read_csv("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Price_Differences_from_US_Average_Most_Recent_Monthly.csv")
+    price_differences_list = price_differences.values.tolist()
+    #print(price_differences_list)
+    return price_differences_list
 
+#Create the session
+session = sessionmaker()
+session.configure(bind=engine)
+s = session()
+
+try:
+    data_6 = load_6()
+    #print(data_6)
+    for i in data_6:
+        #print(i)
+        record_6 = Price_differences(**{
+                    'State' : i[0],
+                    'Natural_Gas_Citygate' : i[1],
+                    'Natural_Gas_Residential' : i[2],
+                    'Electricity_Residential' : i[3],
+                    'Electricity_Commercial' : i[4],
+                    'Electricity_Industrial' : i[5]                    
+                    })
+        #print(record_6)
+        s.add(record_6) #Add all the records
+    
+    s.commit() #Attempt to commit all the records   
+
+
+
+except:
+    s.rollback() #Rollback the changes on error
+    print("there was an error")
+finally:
+    s.close() #Close the connection
+    print("session is closed")
 ## This code is modified from: #https://stackoverflow.com/questions/31394998/using-sqlalchemy-to-load-csv-file-into-a-database
 
 

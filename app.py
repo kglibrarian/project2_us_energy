@@ -56,6 +56,10 @@ def home():
 def mina():
     return render_template("mina.html")
 
+@app.route("/kentucky")
+def kentucky():
+    return render_template("kentucky.html")
+
 @app.route("/api/v1.0/consumptionsector")
 
 def consumptionSectors():
@@ -95,7 +99,7 @@ def electricityGeneration():
     electricity_generation = []
     for State, Petroleum_Fired, Natural_Gas_Fired, Coal_Fired, Nuclear, Hydroelectric, Nonhydroelectric_Renewables  in results:
         electricity_generation_dict = {}
-        #electricity_generation_dict["State"] = State
+        electricity_generation_dict["State"] = State
         electricity_generation_dict["Petroleum Fired"] = Petroleum_Fired
         electricity_generation_dict["Natural Gas Fired"] = Natural_Gas_Fired
         electricity_generation_dict["Coal Fired"] = Coal_Fired
