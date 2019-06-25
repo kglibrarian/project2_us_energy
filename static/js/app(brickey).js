@@ -42,7 +42,7 @@ function flyToLocation(Location) {
 }
 
 
-var Location = "TX";
+// var Location = "TX";
 flyToLocation(Location);
 
 Cesium.Resource.fetchJson('http://127.0.0.1:5000/api/v1.0/plantData').then(function(jsonData) {
