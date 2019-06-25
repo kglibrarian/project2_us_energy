@@ -45,7 +45,7 @@ function flyToLocation(Location) {
 // var Location = "TX";
 flyToLocation(Location);
 
-Cesium.Resource.fetchJson('http://127.0.0.1:5000/api/v1.0/plantData').then(function(jsonData) {
+Cesium.Resource.fetchJson('/api/v1.0/plantData').then(function(jsonData) {
   jsonData.forEach(function(item) {
     if (item.State == Location) {
       console.log(item);
