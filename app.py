@@ -55,6 +55,14 @@ def home():
 def mina():
     return render_template("mina.html")
 
+@app.route("/Kentucky")
+def Kentucky():
+    return render_template("Kentucky.html")
+
+@app.route("/Texas")
+def Texas():
+    return render_template("Texas.html")
+
 @app.route("/api/v1.0/consumptionsector")
 
 def consumptionSectors():
@@ -128,7 +136,7 @@ def energyConsumption():
     
     for State, Coal, Natural_Gas, Motor_Gasoline_excl_Ethanol, Distillate_Fuel_Oil, Jet_Fuel, HGL, Residual_Fuel, Other_Petroleum, Nuclear_Electric_Power, Hydroelectric_Power, Biomass, Other_Renewables, Net_Electricity_Imports, Net_Interstate_Flow_of_Electricity in results:
         energy_consumption_dict = {}
-        energy_consumption_dict["State"] = State
+    #    energy_consumption_dict["State"] = State
         energy_consumption_dict["Coal"] = Coal
         energy_consumption_dict["Natural_Gas"] = Natural_Gas
         energy_consumption_dict["Motor_Gasoline_excl_Ethanol"] = Motor_Gasoline_excl_Ethanol

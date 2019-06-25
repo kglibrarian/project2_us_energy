@@ -1,0 +1,59 @@
+<!-- Any changes for the layout will be added later (Jun 24th) -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>State Dashboard</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-md-12">
+                <h1>Kentucky Data Dashboard</h1>
+            </div>
+        </div>
+        <div id="pie"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script type="text/javascript" src="../static/js/Kentucky.js"></script>
+    </div>
+
+    <div id="container">
+        </div>
+          <!-- <div class="btn-wrapper">
+              <a href="#1" class="btn line">line</a>
+              <a href="#2" class="btn bar">bar</a>
+              <a href="#3" class="btn line2">bar</a>
+          </div> -->
+          <div class="hidden_box">
+              <label for="label1">button here</label>
+              <input type="checkbox" id="label1"/>
+              <div class="hidden_show">
+                <!--undisplay-->     
+                <div id="pie"></div>
+                <div id="line-elec"></div>
+                <div id="line-cons"></div>
+                <!--till here-->
+              </div>
+          </div>
+    
+          <div class="hidden_box">
+              <label for="label2">button here</label>
+              <input type="checkbox" id="label2"/>
+              <div class="hidden_show">
+                <!--undisplay-->     
+                <!--till here-->
+              </div>
+          </div>
+        
+        <div class="charts-contents">
+          <!-- <div id="pie"></div>
+          <div id="line"></div> -->
+        </div>
+        
+        </body>
+    </html>
