@@ -33,6 +33,7 @@ ConsumptionSector = Base.classes.energy_consumption_sector
 ElectricityGeneration = Base.classes.electricity_generation_source
 EnergyConsumption = Base.classes.energy_consumption_estimates
 PlantData = Base.classes.plant_data
+EnergyProduction = Base.classes.energy_production
 # Create our session (link) from Python to the DB
 session = Session(engine)
 
@@ -51,6 +52,10 @@ CORS(app)
 def home():
     return render_template("index.html")
 
+@app.route("/mina")
+def mina():
+    return render_template("mina.html")
+
 @app.route("/api/v1.0/consumptionsector")
 
 def consumptionSectors():
@@ -65,7 +70,7 @@ def consumptionSectors():
     consumption_sector = []
     for State, Residential, Commercial, Industrial, Transportation in results:
         consumption_sector_dict = {}
-        consumption_sector_dict["State"] = State
+    #    consumption_sector_dict["State"] = State
         consumption_sector_dict["Residential"] = Residential
         consumption_sector_dict["Commercial"] = Commercial
         consumption_sector_dict["Industrial"] = Industrial
@@ -90,7 +95,7 @@ def electricityGeneration():
     electricity_generation = []
     for State, Petroleum_Fired, Natural_Gas_Fired, Coal_Fired, Nuclear, Hydroelectric, Nonhydroelectric_Renewables  in results:
         electricity_generation_dict = {}
-        electricity_generation_dict["State"] = State
+        #electricity_generation_dict["State"] = State
         electricity_generation_dict["Petroleum Fired"] = Petroleum_Fired
         electricity_generation_dict["Natural Gas Fired"] = Natural_Gas_Fired
         electricity_generation_dict["Coal Fired"] = Coal_Fired
@@ -186,6 +191,35 @@ def plantData():
         plant_data.append(plant_data_dict)
     #print(plant_data[1])
     return jsonify(plant_data)
+
+@app.route("/api/v1.0/energyProduction")
+def energyProduction():
+    # Query all states
+    results = session.query(EnergyProduction.State, 
+            EnergyProduction.Coal, 
+            EnergyProduction.Natural_Gas_Marketed, 
+            EnergyProduction.Crude_Oil, 
+            EnergyProduction.Nuclear_Electric_Power, 
+            EnergyProduction.Biofuels, 
+            EnergyProduction.Other_Renewable_Energy).all()
+    #print(results)
+
+    # Create a dictionary from the row data and append to a list of all_passengers
+       
+    energy_production = []
+   
+    for State, Coal, Natural_Gas_Marketed, Crude_Oil, Nuclear_Electric_Power, Biofuels, Other_Renewable_Energy in results:
+        energy_production_dict = {}
+        energy_production_dict["State"] = State
+        energy_production_dict["Coal"] = Coal
+        energy_production_dict["Natural_Gas_Marketed"] = Natural_Gas_Marketed
+        energy_production_dict["Crude_Oil"] = Crude_Oil
+        energy_production_dict["Nuclear_Electric_Power"] = Nuclear_Electric_Power
+        energy_production_dict["Biofuels"] = Biofuels
+        energy_production_dict["Other_Renewable_Energy"] = Other_Renewable_Energy
+        energy_production.append(energy_production_dict)
+    #print(energy_production)
+    return jsonify(energy_production)
 
 
 
