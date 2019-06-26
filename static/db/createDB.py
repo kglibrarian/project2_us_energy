@@ -141,10 +141,10 @@ class US_Production_Consumption(Base):
     __tablename__ = 'US_production_consumption'
     __table_args__ = {'sqlite_autoincrement': True}
     id = Column(Integer, primary_key=True, nullable=False)
-    State_caps = Column(VARCHAR(40))
-    State_lower = Column(VARCHAR(40))
-    State_abbr = Column(VARCHAR(40))
-    State_short = Column(VARCHAR(40))
+    State_caps_name = Column(VARCHAR(40))
+    State_lower_name = Column(VARCHAR(40))
+    State_abbr_name = Column(VARCHAR(40))
+    State_short_name = Column(VARCHAR(40))
     Coal_Consumption_2018_all_sectors_thousand_tons = Column(Integer)
     Coal_Consumption_2014_all_sectors_thousand_tons = Column(Integer)
     Production_US_Share = Column(Integer)
@@ -459,10 +459,10 @@ try:
     for i in data_7:
         #print(i)
         record_7 = US_Production_Consumption(**{
-                    'State_caps' : i[0],
-                    'State_lower' : i[1],
-                    'State_abbr' : i[2],
-                    'State_short' : i[3],
+                    'State_caps_name' : i[0],
+                    'State_lower_name' : i[1],
+                    'State_abbr_name' : i[2],
+                    'State_short_name' : i[3],
                     'Coal_Consumption_2018_all_sectors_thousand_tons' : i[4],
                     'Coal_Consumption_2014_all_sectors_thousand_tons' : i[5],
                     'Production_US_Share' : i[6],
@@ -514,6 +514,7 @@ finally:
 ## Use these commands: 
 ## sqlite3 energyData.sqlite
 ## .tables   ## prints a list of the tables in the db
+## .schema <table name> ## prints a list of columns and data types in the table
 ## .dump     ## prints the data in the database
 ## .exit     ## to exit the db file
 

@@ -35,7 +35,7 @@ EnergyConsumption = Base.classes.energy_consumption_estimates
 PlantData = Base.classes.plant_data
 EnergyProduction = Base.classes.energy_production
 PriceDifferences = Base.classes.price_differences
-USProductionConsumption = Base.classes.US_production_consumption
+UsProductionConsumption = Base.classes.US_production_consumption
 
 # Create our session (link) from Python to the DB
 session = Session(engine)
@@ -264,27 +264,23 @@ def priceDifferences():
     return jsonify(price_differences)
 
 @app.route("/api/v1.0/USProductionConsumption")
-def USProductionConsumption():
-    # Query all states
-    
-    results = session.query(USProductionConsumption.State_lower,
-            USProductionConsumption.Coal_Consumption_2018_all_sectors_thousand_tons, 
-            USProductionConsumption.Coal_Consumption_2014_all_sectors_thousand_tons, 
-            USProductionConsumption.Production_US_Share, 
-            USProductionConsumption.Production_Rank, 
-            USProductionConsumption.Consumption_per_Capita_Million_Btu,
-            USProductionConsumption.Consumption_per_Capita_Rank,
-            USProductionConsumption.Expenditures_per_Capita_Dollars,
-            USProductionConsumption.Expenditures_per_Capita_Rank).all()
-    print(results)
-
-    # Create a dictionary from the row data and append to a list of all_passengers
-       
+def query():
+    myresultstoo_again = session.query(UsProductionConsumption.State_lower_name,
+                            UsProductionConsumption.Coal_Consumption_2018_all_sectors_thousand_tons,
+                            UsProductionConsumption.Coal_Consumption_2014_all_sectors_thousand_tons,
+                            UsProductionConsumption.Production_US_Share, 
+                            UsProductionConsumption.Production_Rank, 
+                            UsProductionConsumption.Consumption_per_Capita_Million_Btu,
+                            UsProductionConsumption.Consumption_per_Capita_Rank,
+                            UsProductionConsumption.Expenditures_per_Capita_Dollars,
+                            UsProductionConsumption.Expenditures_per_Capita_Rank).all()
+    #print(myresultstoo_again)
+    #return(myresultstoo_again)
     us_production_consumption = []
     
-    for State_lower, Coal_Consumption_2018_all_sectors_thousand_tons, Coal_Consumption_2014_all_sectors_thousand_tons, Production_US_Share, Production_Rank, Consumption_per_Capita_Million_Btu, Consumption_per_Capita_Rank, Expenditures_per_Capita_Dollars, Expenditures_per_Capita_Rank in results:
+    for State_lower_name, Coal_Consumption_2018_all_sectors_thousand_tons, Coal_Consumption_2014_all_sectors_thousand_tons, Production_US_Share, Production_Rank, Consumption_per_Capita_Million_Btu, Consumption_per_Capita_Rank, Expenditures_per_Capita_Dollars, Expenditures_per_Capita_Rank in myresultstoo_again:
         us_production_consumption_dict = {}
-        us_production_consumption_dict["State_lower"] = State_lower
+        us_production_consumption_dict["State_lower_name"] = State_lower_name
         us_production_consumption_dict["Coal_Consumption_2018_all_sectors_thousand_tons"] = Coal_Consumption_2018_all_sectors_thousand_tons
         us_production_consumption_dict["Coal_Consumption_2014_all_sectors_thousand_tons"] = Coal_Consumption_2014_all_sectors_thousand_tons
         us_production_consumption_dict["Production_US_Share"] = Production_US_Share
