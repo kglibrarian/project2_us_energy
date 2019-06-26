@@ -34,6 +34,9 @@ ElectricityGeneration = Base.classes.electricity_generation_source
 EnergyConsumption = Base.classes.energy_consumption_estimates
 PlantData = Base.classes.plant_data
 EnergyProduction = Base.classes.energy_production
+PriceDifferences = Base.classes.price_differences
+USProductionConsumption = Base.classes.US_production_consumption
+
 # Create our session (link) from Python to the DB
 session = Session(engine)
 
@@ -233,9 +236,66 @@ def energyProduction():
     #print(energy_production)
     return jsonify(energy_production)
 
+@app.route("/api/v1.0/priceDifferences")
+def priceDifferences():
+    # Query all states
+    results = session.query(PriceDifferences.State, 
+            PriceDifferences.Natural_Gas_Citygate, 
+            PriceDifferences.Natural_Gas_Residential, 
+            PriceDifferences.Electricity_Residential, 
+            PriceDifferences.Electricity_Commercial, 
+            PriceDifferences.Electricity_Industrial).all()
+    #print(results)
 
+    # Create a dictionary from the row data and append to a list of all_passengers
+       
+    price_differences = []
+   
+    for State, Natural_Gas_Citygate, Natural_Gas_Residential, Electricity_Residential, Electricity_Commercial, Electricity_Industrial in results:
+        price_differences_dict = {}
+        price_differences_dict["State"] = State
+        price_differences_dict["Natural_Gas_Citygate"] = Natural_Gas_Citygate
+        price_differences_dict["Natural_Gas_Residential"] = Natural_Gas_Residential
+        price_differences_dict["Electricity_Residential"] = Electricity_Residential
+        price_differences_dict["Electricity_Commercial"] = Electricity_Commercial
+        price_differences_dict["Electricity_Industrial"] = Electricity_Industrial
+        price_differences.append(price_differences_dict)
+    #print(price_differences)
+    return jsonify(price_differences)
 
+@app.route("/api/v1.0/USProductionConsumption")
+def USProductionConsumption():
+    # Query all states
+    
+    results = session.query(USProductionConsumption.State_lower,
+            USProductionConsumption.Coal_Consumption_2018_all_sectors_thousand_tons, 
+            USProductionConsumption.Coal_Consumption_2014_all_sectors_thousand_tons, 
+            USProductionConsumption.Production_US_Share, 
+            USProductionConsumption.Production_Rank, 
+            USProductionConsumption.Consumption_per_Capita_Million_Btu,
+            USProductionConsumption.Consumption_per_Capita_Rank,
+            USProductionConsumption.Expenditures_per_Capita_Dollars,
+            USProductionConsumption.Expenditures_per_Capita_Rank).all()
+    print(results)
 
+    # Create a dictionary from the row data and append to a list of all_passengers
+       
+    us_production_consumption = []
+    
+    for State_lower, Coal_Consumption_2018_all_sectors_thousand_tons, Coal_Consumption_2014_all_sectors_thousand_tons, Production_US_Share, Production_Rank, Consumption_per_Capita_Million_Btu, Consumption_per_Capita_Rank, Expenditures_per_Capita_Dollars, Expenditures_per_Capita_Rank in results:
+        us_production_consumption_dict = {}
+        us_production_consumption_dict["State_lower"] = State_lower
+        us_production_consumption_dict["Coal_Consumption_2018_all_sectors_thousand_tons"] = Coal_Consumption_2018_all_sectors_thousand_tons
+        us_production_consumption_dict["Coal_Consumption_2014_all_sectors_thousand_tons"] = Coal_Consumption_2014_all_sectors_thousand_tons
+        us_production_consumption_dict["Production_US_Share"] = Production_US_Share
+        us_production_consumption_dict["Production_Rank"] = Production_Rank
+        us_production_consumption_dict["Consumption_per_Capita_Million_Btu"] = Consumption_per_Capita_Million_Btu
+        us_production_consumption_dict["Consumption_per_Capita_Rank"] = Consumption_per_Capita_Rank
+        us_production_consumption_dict["Expenditures_per_Capita_Dollars"] = Expenditures_per_Capita_Dollars
+        us_production_consumption_dict["Expenditures_per_Capita_Rank"] = Expenditures_per_Capita_Rank
+        us_production_consumption.append(us_production_consumption_dict)
+    #print(us_production_consumption)
+    return jsonify(us_production_consumption)
 
     ####################################
     ## Connect to database using sqlite3
