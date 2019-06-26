@@ -71,11 +71,6 @@ def Texas():
 def Brickey():
     return render_template("brickey.html")
 
-#for Bootstrap test to be deleted later
-@app.route("/boot")
-def Boot():
-    return render_template("bootstrap-template.html")
-
 
 @app.route("/api/v1.0/consumptionsector")
 
@@ -259,7 +254,7 @@ def priceDifferences():
    
     for State, Natural_Gas_Citygate, Natural_Gas_Residential, Electricity_Residential, Electricity_Commercial, Electricity_Industrial in results:
         price_differences_dict = {}
-        price_differences_dict["State"] = State
+        # price_differences_dict["State"] = State
         price_differences_dict["Natural_Gas_Citygate"] = Natural_Gas_Citygate
         price_differences_dict["Natural_Gas_Residential"] = Natural_Gas_Residential
         price_differences_dict["Electricity_Residential"] = Electricity_Residential
