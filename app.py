@@ -55,17 +55,17 @@ CORS(app)
 def home():
     return render_template("index.html")
 
-@app.route("/Illinois")
+@app.route("/illinois")
 def mina():
-    return render_template("Illinois.html")
+    return render_template("illinois.html")
 
-@app.route("/Kentucky")
+@app.route("/kentucky")
 def Kentucky():
-    return render_template("Kentucky.html")
+    return render_template("kentucky.html")
 
-@app.route("/Texas")
+@app.route("/texas")
 def Texas():
-    return render_template("Texas.html")
+    return render_template("texas.html")
 
 @app.route("/brickey")
 def Brickey():
@@ -225,7 +225,7 @@ def energyProduction():
    
     for State, Coal, Natural_Gas_Marketed, Crude_Oil, Nuclear_Electric_Power, Biofuels, Other_Renewable_Energy in results:
         energy_production_dict = {}
-        energy_production_dict["State"] = State
+    #    energy_production_dict["State"] = State
         energy_production_dict["Coal"] = Coal
         energy_production_dict["Natural_Gas_Marketed"] = Natural_Gas_Marketed
         energy_production_dict["Crude_Oil"] = Crude_Oil

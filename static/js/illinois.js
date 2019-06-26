@@ -61,6 +61,31 @@ function buildConsumptionCharts(sample) {
 }
 buildConsumptionCharts();
 
+// Illinois-LineChart (Production)
+function buildProductionCharts(sample) {
+  // @TODO: Use `d3.json` to fetch the sample data for the plots
+  var chartsURL = "/api/v1.0/energyProduction";
+  d3.json(chartsURL).then(function (data) {
+    var data_line = data[0]; 
+    ind_key_line = Object.keys(data_line);
+    ind_val_line = Object.values(data_line);
+  
+    var chart = [{
+      x: ind_val_line,
+      y: ind_key_line,
+      type: 'bar',
+      orientation: 'h',
+      size: 4,
+      title: "Illinois Production Estimates, 2016"
+    }];
+
+    Plotly.newPlot('line-prod', chart);
+    });
+}
+buildProductionCharts();
+
+
+
 
 // var mydata = [{"Commercial":500,"Industrial":1176.2,"Residential":891.6}];
 // console.log(mydata);
