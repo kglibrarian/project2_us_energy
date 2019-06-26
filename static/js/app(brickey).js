@@ -53,8 +53,7 @@ function flyToLocation(Location) {
   });
 }
 
-
-// var Location = "TX";
+// var Location = "IL";
 flyToLocation(Location);
 
 Cesium.Resource.fetchJson('/api/v1.0/plantData').then(function(jsonData) {
