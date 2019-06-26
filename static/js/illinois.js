@@ -11,10 +11,22 @@ function buildCharts(sample) {
     var chart = [{
       values: ind_val,
       labels: ind_key,
-      type: 'pie',
+      type: 'pie'
     }];
 
-    Plotly.newPlot('pie', chart); 
+    var layout = {
+      autosize: true,
+      title: {
+        text: 'Energy Consumption <br> by End-User Sector 2017',
+        font: {
+        size: 17
+        },
+      },
+    };
+    
+    
+
+    Plotly.newPlot('pie', chart, layout); 
     });
   }
 buildCharts();
@@ -33,9 +45,30 @@ function buildLineCharts(sample) {
       y: ind_key_line,
       type: 'bar',
       orientation: 'h',
+
     }];
 
-    Plotly.newPlot('line-elec', chart);
+    var layout = {
+      autosize: true,
+      yaxis: {
+        automargin: true
+      },
+      title: {
+        text: 'Net Electricity Generation <br> by Source Mar 2019',
+        font: {
+        size: 17
+        },
+      },
+      xaxis: {
+        title: 'thousand MWh',
+        titlefont: {
+          size: 10,
+        },
+        showticklabels: true,
+      }
+    };
+
+    Plotly.newPlot('line-elec', chart, layout);
     });
 }
 buildLineCharts();
@@ -56,7 +89,27 @@ function buildConsumptionCharts(sample) {
       orientation: 'h',
     }];
 
-    Plotly.newPlot('line-cons', chart);
+    var layout = {
+      autosize: true,
+      yaxis: {
+        automargin: true
+      },
+      title: {
+        text: 'Energy Consumption Estimates, 2017',
+        font: {
+        size: 17
+        },
+      },
+      xaxis: {
+        title: 'Trillion Btu',
+        titlefont: {
+          size: 10,
+        },
+        showticklabels: true,
+      }
+    };
+
+    Plotly.newPlot('line-cons', chart, layout);
     });
 }
 buildConsumptionCharts();
@@ -75,11 +128,30 @@ function buildProductionCharts(sample) {
       y: ind_key_line,
       type: 'bar',
       orientation: 'h',
-      size: 4,
       title: "Illinois Production Estimates, 2016"
     }];
 
-    Plotly.newPlot('line-prod', chart);
+    var layout = {
+      autosize: true,
+      yaxis: {
+        automargin: true
+      },
+      title: {
+        text: 'Energy Production Estimates, 2016',
+        font: {
+        size: 17
+        },
+      },
+      xaxis: {
+        title: 'Trillion Btu',
+        titlefont: {
+          size: 10,
+        },
+        showticklabels: true,
+      }
+    };
+
+    Plotly.newPlot('line-prod', chart, layout);
     });
 }
 buildProductionCharts();

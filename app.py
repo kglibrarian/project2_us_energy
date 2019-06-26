@@ -71,6 +71,12 @@ def Texas():
 def Brickey():
     return render_template("brickey.html")
 
+#for Bootstrap test to be deleted later
+@app.route("/boot")
+def Boot():
+    return render_template("bootstrap-template.html")
+
+
 @app.route("/api/v1.0/consumptionsector")
 
 def consumptionSectors():
@@ -306,4 +312,5 @@ def query():
     #return response
 
 if __name__ == "__main__":
+    app.debug = True
     app.run()
