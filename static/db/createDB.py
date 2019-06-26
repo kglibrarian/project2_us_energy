@@ -137,12 +137,30 @@ class Price_differences(Base):
     Electricity_Industrial = Column(Integer)
 
 
+class US_Production_Consumption(Base):
+    __tablename__ = 'US_production_consumption'
+    __table_args__ = {'sqlite_autoincrement': True}
+    id = Column(Integer, primary_key=True, nullable=False)
+    State_caps_name = Column(VARCHAR(40))
+    State_lower_name = Column(VARCHAR(40))
+    State_abbr_name = Column(VARCHAR(40))
+    State_short_name = Column(VARCHAR(40))
+    Coal_Consumption_2018_all_sectors_thousand_tons = Column(Integer)
+    Coal_Consumption_2014_all_sectors_thousand_tons = Column(Integer)
+    Production_US_Share = Column(Integer)
+    Production_Rank = Column(Integer)
+    Consumption_per_Capita_Million_Btu = Column(Integer)
+    Consumption_per_Capita_Rank = Column(Integer)
+    Expenditures_per_Capita_Dollars = Column(Integer)
+    Expenditures_per_Capita_Rank = Column(Integer)
+
 Energy_consumption_sector.__table__.create(bind=engine, checkfirst=True)
 Electricity_generation_source.__table__.create(bind=engine, checkfirst=True)
 Energy_consumption_estimates.__table__.create(bind=engine, checkfirst=True)
 Plant_data.__table__.create(bind=engine, checkfirst=True)
 Energy_production.__table__.create(bind=engine, checkfirst=True)
 Price_differences.__table__.create(bind=engine, checkfirst=True)
+US_Production_Consumption.__table__.create(bind=engine, checkfirst=True)
 
 ####################################
 ## Extract: Use SQLAlchemy to Load CSV data into Tables
@@ -184,9 +202,10 @@ try:
 #http://docs.pyexcel.org/en/latest/showcases/db_injection.html
 except:
     s.rollback() #Rollback the changes on error
+    print("there was an error in 1")
 finally:
     s.close() #Close the connection
-#print("Time elapsed: " + str(time() - t) + " s.") #0.091s
+    print("session is closed in 1")
 
 ####################################
 ## Extract: Use SQLAlchemy to Load CSV data into Tables
@@ -211,7 +230,7 @@ try:
     data_2 = load_2()
     #print(data_2)
     for i in data_2:
-        print(i)
+        #print(i)
         record = Electricity_generation_source(**{
                     'State' : i[0],
                     'Petroleum_Fired' : i[1],
@@ -228,9 +247,11 @@ try:
 #http://docs.pyexcel.org/en/latest/showcases/db_injection.html
 except:
     s.rollback() #Rollback the changes on error
+    print("there was an error in 2")
 finally:
     s.close() #Close the connection
-#print("Time elapsed: " + str(time() - t) + " s.") #0.091s
+    print("session is closed in 2")
+
 
 def load_3():
     #energy_consumption_estimates = genfromtxt("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Energy_Consumption_Estimates_2017.csv", delimiter=',', skip_header=1, converters={0: lambda s: str(s)})
@@ -276,10 +297,10 @@ try:
 #http://docs.pyexcel.org/en/latest/showcases/db_injection.html
 except:
      s.rollback() #Rollback the changes on error
-     print("there was an error")
+     print("there was an error in 3")
 finally:
      s.close() #Close the connection
-     print("session is closed")
+     print("session is closed in 3")
 #print("Time elapsed: " + str(time() - t) + " s.") #0.091s
 
 
@@ -328,10 +349,10 @@ try:
 
 except:
     s.rollback() #Rollback the changes on error
-    print("there was an error")
+    print("there was an error in 4")
 finally:
     s.close() #Close the connection
-    print("session is closed")       
+    print("session is closed in 4")       
 
 
 def load_5():
@@ -371,10 +392,10 @@ try:
 
 except:
     s.rollback() #Rollback the changes on error
-    print("there was an error")
+    print("there was an error in 5")
 finally:
     s.close() #Close the connection
-    print("session is closed")
+    print("session is closed in 5")
 
 def load_6():
     #price_differences = np.genfromtxt("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/Price_Differences_from_US_Average_Most_Recent_Monthly.csv",delimiter=',', autostrip=True, skip_header=1, usecols=np.arange(0,15), invalid_raise = False, deletechars="~!@#$%^&*()-=+~\|]}[{';: /?.>,<.", dtype='unicode', converters={0: lambda s: str(s)})
@@ -412,13 +433,58 @@ try:
 
 except:
     s.rollback() #Rollback the changes on error
-    print("there was an error")
+    print("there was an error in 6")
 finally:
     s.close() #Close the connection
-    print("session is closed")
+    print("session is closed in 6")
+
+
+def load_7():
+    #US_production_consumption = np.genfromtxt("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/US_Consumption_Production_Data.csv",delimiter=',', autostrip=True, skip_header=1, usecols=np.arange(0,15), invalid_raise = False, deletechars="~!@#$%^&*()-=+~\|]}[{';: /?.>,<.", dtype='unicode', converters={0: lambda s: str(s)})
+    #print(US_data)
+    #return US_production_consumption.tolist()
+    US_production_consumption = pd.read_csv("C:/Users/keg827/Documents/3 Data Science Bootcamp Code/project2_us_energy/static/data/US_Consumption_Production_Data.csv")
+    US_production_consumption_list = US_production_consumption.values.tolist()
+    #print(US_production_consumption_list)
+    return US_production_consumption_list
+
+#Create the session
+session = sessionmaker()
+session.configure(bind=engine)
+s = session()
+
+try:
+    data_7 = load_7()
+    #print(data_7)
+    for i in data_7:
+        #print(i)
+        record_7 = US_Production_Consumption(**{
+                    'State_caps_name' : i[0],
+                    'State_lower_name' : i[1],
+                    'State_abbr_name' : i[2],
+                    'State_short_name' : i[3],
+                    'Coal_Consumption_2018_all_sectors_thousand_tons' : i[4],
+                    'Coal_Consumption_2014_all_sectors_thousand_tons' : i[5],
+                    'Production_US_Share' : i[6],
+                    'Production_Rank' : i[7],
+                    'Consumption_per_Capita_Million_Btu' : i[8],
+                    'Consumption_per_Capita_Rank' : i[9],
+                    'Expenditures_per_Capita_Dollars' : i[10],
+                    'Expenditures_per_Capita_Rank' : i[11]
+                    })
+        #print(record_7)
+        s.add(record_7) #Add all the records
+    
+    s.commit() #Attempt to commit all the records   
+
+
+except:
+    s.rollback() #Rollback the changes on error
+    print("there was an error in 7")
+finally:
+    s.close() #Close the connection
+    print("session is closed in 7")
 ## This code is modified from: #https://stackoverflow.com/questions/31394998/using-sqlalchemy-to-load-csv-file-into-a-database
-
-
 #############################
 ## Creating a Database using Pandas to_SQL function
 #############################
@@ -448,6 +514,7 @@ finally:
 ## Use these commands: 
 ## sqlite3 energyData.sqlite
 ## .tables   ## prints a list of the tables in the db
+## .schema <table name> ## prints a list of columns and data types in the table
 ## .dump     ## prints the data in the database
 ## .exit     ## to exit the db file
 
