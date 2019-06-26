@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Illinois State Dashboard</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+        <script src="https://cesiumjs.org/releases/1.58/Build/Cesium/Cesium.js"></script>
+        <link href="https://cesiumjs.org/releases/1.58/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+        
+        <!-- Bootstrap -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../static/js/illinois.js"></script>
+        <!-- Bootstrap end-->
+  </head>
+
+    
+	<body>
+    <!-- Head from Bootstrap -->
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="#">Logo</a>
+        </div>
+        
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./index.html">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Header end -->
+
+	<container>
+        <div>
+            <h1> About U.S. Data Dashboard</h1>
+        </div>
+        <div>
+            <h3>Project Description</h3>
+            <p>The U.S. Energy Dashboard will display 
+                U.S.-related energy data using charts 
+                and visualizations for both the entire 
+                US and individual states. The main page 
+                of the app features a choropleth map of 
+                U.S. energy consumption. The app also 
+                allows users to select states and be routed 
+                to a page for that state’s energy data. 
+                Each state page has more than 3 charts of 
+                data about that state's energy consumption 
+                and production. We store our data in a 
+                sqlite database and will deploy our app using 
+                heroku. 
+                </p>
+        </div>
+    </container>	
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+          <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+          <script type="text/javascript" src="../static/js/illinois.js"></script>
+          <script type="text/javascript" src="../static/js/app(brickey).js"></script>
+
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+          <link rel="manifest" href="/site.webmanifest">
+
+  
+
+
+<footer class="container-fluid text-center">
+  <p>Northwestern University Boot Camp</p>
+</footer>
+
+</body>
+</html>

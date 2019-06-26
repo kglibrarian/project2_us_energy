@@ -16,8 +16,10 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 #################################################
-## Database Setup using SQLAlchemy
+## Database Connection using SQLAlchemy
 #################################################
+##http://flask.pocoo.org/docs/1.0/tutorial/database/
+
 ## create a connection with the database
 engine = create_engine("sqlite:///static/db/energyData.sqlite", connect_args={'check_same_thread': False})
 ## reflect an existing database into a new model
@@ -46,6 +48,7 @@ session = Session(engine)
 app = Flask(__name__)
 CORS(app)
 
+
 #################################################
 # Flask Routes
 #################################################
@@ -70,6 +73,10 @@ def Texas():
 @app.route("/brickey")
 def Brickey():
     return render_template("brickey.html")
+
+@app.route("/about")
+def About():
+    return render_template("about.html")
 
 #for Bootstrap test to be deleted later
 @app.route("/boot")
