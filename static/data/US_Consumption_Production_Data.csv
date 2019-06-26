@@ -1,4 +1,4 @@
-State_CAPS,State_LOWER,State_ABBR,State_SHORT,Coal_Consumption_2018_all_sectors_(thousand_tons),Coal_Consumption_2014_all_sectors_(thousand_tons),Production_U.S._Share,"Production,_Rank","Consumption_per_Capita,_Million_Btu","Consumption_per_Capita,_Rank","Expenditures_per_Capita,_Dollars","Expenditures_per_Capita,_Rank"
+State_caps,State_lower,State_abbr,State_short,Coal_Consumption_2018_all_sectors_thousand_tons,Coal_Consumption_2014_all_sectors_thousand_tons,Production_US_Share,Production_Rank,Consumption_per_Capita_Million_Btu,Consumption_per_Capita_Rank,Expenditures_per_Capita_Dollars,Expenditures_per_Capita_Rank
 ALASKA,Alaska,AK,Alaska,941.94,885.559,1.7,13,809,3,6241,2
 ALABAMA,Alabama,AL,Ala.,16336.245,24169.776,1.3,16,398,12,3969,8
 ARKANSAS,Arkansas,AR,Ark.,17523.535,19368.424,1.3,15,354,17,3448,22
