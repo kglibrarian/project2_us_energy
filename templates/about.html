@@ -1,50 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+<head>
 		<meta charset="utf-8">
-		<title>Illinois State Dashboard</title>
+		<title>About</title>
 		<link rel="stylesheet" type="text/css" href="../static/css/style.css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-        <script src="https://cesiumjs.org/releases/1.58/Build/Cesium/Cesium.js"></script>
-        <link href="https://cesiumjs.org/releases/1.58/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-        
-        <!-- Bootstrap -->
+		<!-- Bootstrap -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../static/js/illinois.js"></script>
         <!-- Bootstrap end-->
-  </head>
-
-    
-	<body>
+ </head>
+ <body>
     <!-- Head from Bootstrap -->
     <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>                        
-          </button>
-          <a class="navbar-brand" href="#">Logo</a>
-        </div>
-        
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="./index.html">Home</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- Header end -->
-
-	<container>
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>                        
+                </button>
+                <!-- <a class="navbar-brand" href="#">Logo</a> -->
+              </div>
+              
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="{{ url_for('.home') }}">Home</a></li>
+                  <li><a href="{{ url_for('.mina') }}">Illinois</a></li>
+                  <li><a href="#">Projects</a></li>
+                  <li><a href="#">Contact</a></li>
+                </ul>
+                <!-- <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul> -->
+              </div>
+            </div>
+          </nav>
+          <!-- Header end -->
+	
+	<div class= "container">
         <div>
             <h1> About U.S. Data Dashboard</h1>
         </div>
@@ -65,25 +61,17 @@
                 heroku. 
                 </p>
         </div>
-    </container>	
+    </div>	
 
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
-          <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-          <script type="text/javascript" src="../static/js/illinois.js"></script>
-          <script type="text/javascript" src="../static/js/app(brickey).js"></script>
-
-          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-          <link rel="manifest" href="/site.webmanifest">
-
+          
   
 
 
 <footer class="container-fluid text-center">
   <p>Northwestern University Boot Camp</p>
 </footer>
+       
+
 
 </body>
 </html>

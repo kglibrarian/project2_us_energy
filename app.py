@@ -9,6 +9,7 @@ from sqlalchemy import create_engine, func
 from flask import (
     Flask,
     render_template,
+    url_for,
     jsonify,
     request,
     redirect)
@@ -64,16 +65,19 @@ def mina():
 
 @app.route("/kentucky")
 def Kentucky():
-    return render_template("kentucky.html")
+    return render_template("Kentucky.html")
 
 @app.route("/texas")
 def Texas():
-    return render_template("texas.html")
+    return render_template("Texas.html")
 
 @app.route("/brickey")
 def Brickey():
     return render_template("brickey.html")
 
+@app.route("/about")
+def About():
+    return render_template("about.html")
 
 @app.route("/api/v1.0/consumptionsector")
 
