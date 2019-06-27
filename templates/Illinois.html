@@ -38,7 +38,7 @@
       
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="http://127.0.0.1:5000">Home</a></li>
+          <li class="active"><a href="{{ url_for('.home') }}">Home</a></li>
           <li><a href="{{ url_for('.Illinois') }}">Illinois</a></li>
           <li><a href="{{ url_for('.Texas') }}">Texas</a></li>
           <li><a href="{{ url_for('.Kentucky') }}">Kentucky</a></li>
@@ -73,20 +73,25 @@
                 
               </div>
         
-            </div>
+          </div>
         
             
-        </div>
+        <!-- </div> -->
           
         <div class="container text-center">    
-          <h3 class="fun-facts">FUN FACTS ABOUT ILLINOIS</h3><br>
-          <P>
-            <li>Illinois is the fifth-largest energy-consuming state in the nation</li>
-            <li>Illinois ranks fourth in the nation in crude oil refining capacity</li>
-            <li>The estimated coal reserves in Illinois are the second-largest after Montana</li>
-            <li>Illinois ranked first in the nation in 2018 in net electricity generation from nuclear power</li>
-
-          </P>
+          <div>
+            <h3 class="fun-facts">FUN FACTS ABOUT ILLINOIS</h3><br>
+            <ul>
+              <li>Illinois is the fifth-largest energy-consuming 
+                    state in the nation</li>
+              <li>Illinois ranks fourth in the nation in crude oil 
+                    refining capacity</li>
+              <li>The estimated coal reserves in Illinois are the 
+                    second-largest after Montana</li>
+              <li>Illinois ranked first in the nation in 2018 in 
+                    net electricity generation from nuclear power</li>
+            </ul>
+          </div>        
           <div class="row">
             <div class="col-sm-6">
               <div id="pie"></div>
@@ -112,6 +117,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script type="text/javascript" src="../static/js/illinois.js"></script>
-        <script type="text/javascript" src="../static/js/app(brickey).js"></script>
+        <script type="text/javascript" src="../static/js/app_brickey.js"></script>
     </body>
 </html>
