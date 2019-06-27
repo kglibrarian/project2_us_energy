@@ -1,64 +1,117 @@
-//Texas-Piechart
+//Texas-Piechart (Consumption by Sector)
 function buildCharts(sample) {
 
-    // @TODO: Use `d3.json` to fetch the sample data for the plots
-    var chartsURL = "/api/v1.0/consumptionsector";
-    d3.json(chartsURL).then(function (data) {
-      var data = data[2]; 
-      ind_key = Object.keys(data);
-      ind_val = Object.values(data);
-      
-      var chart = [{
-        values: ind_val,
-        labels: ind_key,
-        type: 'pie',
-      }];
-  
-      Plotly.newPlot('pie', chart);
-      });
-    }
-buildCharts();
-  
-  // Texas-LineChart
-function buildLineCharts(sample) {
-    // @TODO: Use `d3.json` to fetch the sample data for the plots
-    var chartsURL = "/api/v1.0/electricityGeneration";
-    d3.json(chartsURL).then(function (data) {
-      var data_line = data[2]; 
-      ind_key_line = Object.keys(data_line);
-      ind_val_line = Object.values(data_line);
+  // @TODO: Use `d3.json` to fetch the sample data for the plots
+  var chartsURL = "/api/v1.0/consumptionsector";
+  d3.json(chartsURL).then(function (data) {
+    var data = data[2]; 
+    ind_key = Object.keys(data);
+    ind_val = Object.values(data);
     
-      var chart = [{
-        x: ind_val_line,
-        y: ind_key_line,
-        type: 'bar',
-        orientation: 'h',
-      }];
-  
-      Plotly.newPlot('line-elec', chart);
-      });
+    var chart = [{
+      values: ind_val,
+      labels: ind_key,
+      type: 'pie'
+    }];
+
+    var layout = {
+      autosize: true,
+      title: {
+        text: 'Energy Consumption <br> by End-User Sector 2017',
+        font: {
+        size: 17
+        },
+      },
+    };
+    
+    
+
+    Plotly.newPlot('pie', chart, layout); 
+    });
   }
+buildCharts();
+
+// Texas-LineChart (Electricity)
+function buildLineCharts(sample) {
+  // @TODO: Use `d3.json` to fetch the sample data for the plots
+  var chartsURL = "/api/v1.0/electricityGeneration";
+  d3.json(chartsURL).then(function (data) {
+    var data_line = data[2]; 
+    ind_key_line = Object.keys(data_line);
+    ind_val_line = Object.values(data_line);
+  
+    var chart = [{
+      x: ind_val_line,
+      y: ind_key_line,
+      type: 'bar',
+      orientation: 'h',
+
+    }];
+
+    var layout = {
+      autosize: true,
+      yaxis: {
+        automargin: true
+      },
+      title: {
+        text: 'Net Electricity Generation <br> by Source Mar 2019',
+        font: {
+        size: 17
+        },
+      },
+      xaxis: {
+        title: 'thousand MWh',
+        titlefont: {
+          size: 10,
+        },
+        showticklabels: true,
+      }
+    };
+
+    Plotly.newPlot('line-elec', chart, layout);
+    });
+}
 buildLineCharts();
 
 // Texas-LineChart (Consumption)
 function buildConsumptionCharts(sample) {
-    // @TODO: Use `d3.json` to fetch the sample data for the plots
-    var chartsURL = "/api/v1.0/energyConsumption";
-    d3.json(chartsURL).then(function (data) {
-      var data_line = data[2]; 
-      ind_key_line = Object.keys(data_line);
-      ind_val_line = Object.values(data_line);
-    
-      var chart = [{
-        x: ind_val_line,
-        y: ind_key_line,
-        type: 'bar',
-        orientation: 'h',
-      }];
+  // @TODO: Use `d3.json` to fetch the sample data for the plots
+  var chartsURL = "/api/v1.0/energyConsumption";
+  d3.json(chartsURL).then(function (data) {
+    var data_line = data[2]; 
+    ind_key_line = Object.keys(data_line);
+    ind_val_line = Object.values(data_line);
   
-      Plotly.newPlot('line-cons', chart);
-      });
-  }
+    var chart = [{
+      x: ind_val_line,
+      y: ind_key_line,
+      type: 'bar',
+      orientation: 'h',
+    }];
+
+    var layout = {
+      autosize: true,
+      yaxis: {
+        automargin: true
+      },
+      title: {
+        text: 'Energy Consumption Estimates, 2017',
+        font: {
+        size: 17
+        },
+      },
+      xaxis: {
+        title: 'Trillion Btu',
+        titlefont: {
+          size: 10,
+        },
+        showticklabels: true,
+      }
+    };
+
+    Plotly.newPlot('line-cons', chart, layout);
+    });
+}
 buildConsumptionCharts();
 
 // Texas-LineChart (Production)
@@ -75,19 +128,74 @@ function buildProductionCharts(sample) {
       y: ind_key_line,
       type: 'bar',
       orientation: 'h',
+      title: "Texas Production Estimates, 2016"
     }];
 
-    Plotly.newPlot('line-prod', chart);
+    var layout = {
+      autosize: true,
+      yaxis: {
+        automargin: true
+      },
+      title: {
+        text: 'Energy Production Estimates, 2016',
+        font: {
+        size: 17
+        },
+      },
+      xaxis: {
+        title: 'Trillion Btu',
+        titlefont: {
+          size: 10,
+        },
+        showticklabels: true,
+      }
+    };
+
+    Plotly.newPlot('line-prod', chart, layout);
     });
 }
 buildProductionCharts();
+
+
+
+// Texas-LineChart (Production)
+function buildPriceCharts(sample) {
+  // @TODO: Use `d3.json` to fetch the sample data for the plots
+  var chartsURL = "/api/v1.0/priceDifferences";
+  d3.json(chartsURL).then(function (data) {
+    var data_line = data[2]; 
+    ind_key_line = Object.keys(data_line);
+    ind_val_line = Object.values(data_line);
   
-  // var mydata = [{"Commercial":500,"Industrial":1176.2,"Residential":891.6}];
-  // console.log(mydata);
-  // for(var i=0;i<mydata.length;i++) {
-  //   var obj = mydata[i]+[1];
-  //   console.log(obj);
-  // }
-  
-  // ind_key = console.log(Object.keys(obj));
-  // ind_val = console.log(Object.values(obj));
+    var chart = [{
+      x: ind_val_line,
+      y: ind_key_line,
+      type: 'bar',
+      orientation: 'h',
+      title: "Price Differences from U.S. Average <br> Most Recent Monthly"
+    }];
+
+    var layout = {
+      autosize: true,
+      yaxis: {
+        automargin: true
+      },
+      title: {
+        text: 'Energy Production Estimates, 2016',
+        font: {
+        size: 17
+        },
+      },
+      xaxis: {
+        title: 'Percent',
+        titlefont: {
+          size: 10,
+        },
+        showticklabels: true,
+      }
+    };
+
+    Plotly.newPlot('line-prod', chart, layout);
+    });
+}
+buildPriceCharts();
