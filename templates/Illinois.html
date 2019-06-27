@@ -16,10 +16,11 @@
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
           
           <!-- Bootstrap end-->
-          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+          <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-          <link rel="manifest" href="/site.webmanifest">
+          <link rel="manifest" href="/site.webmanifest"> -->
 
   </head>
   
@@ -38,8 +39,8 @@
       
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="{{ url_for('.home') }}">Home</a></li>
-          <li><a href="{{ url_for('.Illinois') }}">Illinois</a></li>
+          <li><a href="{{ url_for('.home') }}">Home</a></li>
+          <li class="active"><a href="{{ url_for('.Illinois') }}">Illinois</a></li>
           <li><a href="{{ url_for('.Texas') }}">Texas</a></li>
           <li><a href="{{ url_for('.Kentucky') }}">Kentucky</a></li>
           <li><a href="{{ url_for('.About') }}">About</a></li>
@@ -85,16 +86,10 @@
         
         <div class="container text-center">    
           <div>
-            <h3 class="fun-facts">FUN FACTS ABOUT ILLINOIS</h3><br>
+            <h3 class="fun-facts">ILLINOIS QUICK FACTS</h3><br>
             <ul>
-              <li>Illinois is the fifth-largest energy-consuming 
-                    state in the nation</li>
-              <li>Illinois ranks fourth in the nation in crude oil 
-                    refining capacity</li>
-              <li>The estimated coal reserves in Illinois are the 
-                    second-largest after Montana</li>
-              <li>Illinois ranked first in the nation in 2018 in 
-                    net electricity generation from nuclear power</li>
+              <li>Illinois is the fifth-largest energy-consuming state in the nation, and its industrial sector, which includes petroleum refining and coal mining, uses the most energy of any end-use sector in the state.</li>
+              <li>Illinois ranked first in the nation in 2018 in net electricity generation from nuclear power, and the state's six nuclear plants accounted for 12% of U.S. nuclear power generation.</li>
             </ul>
           </div>        
           <div class="row">
