@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>U.S. Energy Dashboard</title>
+<head>
+    <meta charset="utf-8">
+    <title>US Data</title>
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    
+    
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/illinois.js"></script>
+    <!-- Bootstrap end-->
     
     <!-- Leaflet CSS & JS-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
@@ -17,17 +28,46 @@
 
     <!-- Leaflet-Choropleth JavaScript -->
     <script type="text/javascript" src="../static/js/choropleth.js"></script>
-	</head>
-	<body>
-        <h1>U.S. Data</h1>
-        <!-- The div where we will inject our map -->
-        <div>
-            <h2 class="active" id="Data1" value="Data1">CLick Me 1</h2>
-            <h2 class="inactive" id="Data2" value="Data2">Click Me 2</h2>
-            <div id="myDiv">
 
-            </div>
+</head>
+<body>
+    <!-- Head from Bootstrap -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+            </button>
+            <!-- <a class="navbar-brand" href="#">Logo</a> -->
         </div>
+                      
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ url_for('.home') }}">Home</a></li>    
+                <li><a href="{{ url_for('.Illinois') }}">Illinois</a></li>
+                <li><a href="{{ url_for('.Texas') }}">Texas</a></li>
+                <li><a href="{{ url_for('.Kentucky') }}">Kentucky</a></li>
+                <li class="active"><a href="{{ url_for('.About') }}">About</a></li>
+            </ul>
+                <!-- <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul> -->
+        </div>
+        </div>
+    </nav>
+    <!-- Header end -->
+    
+ 
+    <h1>U.S. Data</h1>
+        <!-- The div where we will inject our map -->
+    <div>
+        <h2 class="active" id="Data1" value="Data1">CLick Me 1</h2>
+        <h2 class="inactive" id="Data2" value="Data2">Click Me 2</h2>
+        <div id="myDiv">
+        </div>
+    </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>

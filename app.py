@@ -9,6 +9,7 @@ from sqlalchemy import create_engine, func
 from flask import (
     Flask,
     render_template,
+    url_for,
     jsonify,
     request,
     redirect)
@@ -16,8 +17,10 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 #################################################
-## Database Setup using SQLAlchemy
+## Database Connection using SQLAlchemy
 #################################################
+##http://flask.pocoo.org/docs/1.0/tutorial/database/
+
 ## create a connection with the database
 engine = create_engine("sqlite:///static/db/energyData.sqlite", connect_args={'check_same_thread': False})
 ## reflect an existing database into a new model
@@ -46,6 +49,7 @@ session = Session(engine)
 app = Flask(__name__)
 CORS(app)
 
+
 #################################################
 # Flask Routes
 #################################################
@@ -56,26 +60,24 @@ def home():
     return render_template("index.html")
 
 @app.route("/illinois")
-def mina():
-    return render_template("illinois.html")
+def Illinois():
+    return render_template("Illinois.html")
 
 @app.route("/kentucky")
 def Kentucky():
-    return render_template("kentucky.html")
+    return render_template("Kentucky.html")
 
 @app.route("/texas")
 def Texas():
-    return render_template("texas.html")
+    return render_template("Texas.html")
 
 @app.route("/brickey")
 def Brickey():
     return render_template("brickey.html")
 
-#for Bootstrap test to be deleted later
-@app.route("/boot")
-def Boot():
-    return render_template("bootstrap-template.html")
-
+@app.route("/about")
+def About():
+    return render_template("about.html")
 
 @app.route("/api/v1.0/consumptionsector")
 
@@ -259,7 +261,7 @@ def priceDifferences():
    
     for State, Natural_Gas_Citygate, Natural_Gas_Residential, Electricity_Residential, Electricity_Commercial, Electricity_Industrial in results:
         price_differences_dict = {}
-        price_differences_dict["State"] = State
+        # price_differences_dict["State"] = State
         price_differences_dict["Natural_Gas_Citygate"] = Natural_Gas_Citygate
         price_differences_dict["Natural_Gas_Residential"] = Natural_Gas_Residential
         price_differences_dict["Electricity_Residential"] = Electricity_Residential

@@ -158,13 +158,44 @@ buildProductionCharts();
 
 
 
+// Illinois-LineChart (Production)
+function buildPriceCharts(sample) {
+  // @TODO: Use `d3.json` to fetch the sample data for the plots
+  var chartsURL = "/api/v1.0/priceDifferences";
+  d3.json(chartsURL).then(function (data) {
+    var data_line = data[0]; 
+    ind_key_line = Object.keys(data_line);
+    ind_val_line = Object.values(data_line);
+  
+    var chart = [{
+      x: ind_val_line,
+      y: ind_key_line,
+      type: 'bar',
+      orientation: 'h',
+      title: "Price Differences from U.S. Average <br> Most Recent Monthly"
+    }];
 
-// var mydata = [{"Commercial":500,"Industrial":1176.2,"Residential":891.6}];
-// console.log(mydata);
-// for(var i=0;i<mydata.length;i++) {
-//   var obj = mydata[i]+[1];
-//   console.log(obj);
-// }
+    var layout = {
+      autosize: true,
+      yaxis: {
+        automargin: true
+      },
+      title: {
+        text: 'Energy Production Estimates, 2016',
+        font: {
+        size: 17
+        },
+      },
+      xaxis: {
+        title: 'Percent',
+        titlefont: {
+          size: 10,
+        },
+        showticklabels: true,
+      }
+    };
 
-// ind_key = console.log(Object.keys(obj));
-// ind_val = console.log(Object.values(obj));
+    Plotly.newPlot('line-prod', chart, layout);
+    });
+}
+buildPriceCharts();

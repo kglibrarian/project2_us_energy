@@ -26,17 +26,17 @@ function flyToLocation(Location) {
   if (Location == "TX") {
     var lon = -99.683617;
     var lat = 31.169621;
-    var zoom = 1750000.0
-    var adjustLatitude = 4.5;
+    var zoom = 1850000.0
+    var adjustLatitude = 4.95;
   } else if (Location == "IL") {
     var lon = -89.30131;
     var lat = 39.84215;
-    var zoom = 1350000.0
-    var adjustLatitude = 2.5;
+    var zoom = 1400000.0
+    var adjustLatitude = 2.65;
   } else if (Location == "KY") {
     var lon = -85.7700;
     var lat = 37.8393;
-    var zoom = 750000.0
+    var zoom = 800000.0
     var adjustLatitude = 1.75;
   } else {
     var lon = -98.5795;
@@ -53,7 +53,7 @@ function flyToLocation(Location) {
   });
 }
 
-// var Location = "IL";
+// var Location = "TX";
 flyToLocation(Location);
 
 Cesium.Resource.fetchJson('/api/v1.0/plantData').then(function(jsonData) {
