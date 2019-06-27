@@ -1,45 +1,58 @@
-Plotly.d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vQgIW-W7n6lS0YFrMRuj6wOpCd6bbzm2ukaiOlLh--r67-hpuwI_7Qbe5ZodIF0IEHcdcfQQNL2ony0/pubhtml', function(err, rows){
-                function unpack(rows, key) {
-                    return rows.map(function(row) { return row[key]; });
-                }
+// var Coal_Consumption_2014_all_sectors_thousand_tons = [];
+// var Coal_Consumption_2018_all_sectors_thousand_tons = [];
+// var Consumption_per_Capita_Million_Btu= [];
+// var Consumption_per_Capita_Rank = [];
+// var Expenditures_per_Capita_Dollars = []; 
+// var Expenditures_per_Capita_Rank = []; 
+// var Production_Rank = [];
+// var Production_US_Share = [];
+// var State_lower_name = [];
 
-                var data1 = [{
-                    type: 'choropleth',
-                    locationmode: 'USA-states',
-                    locations: unpack(rows, 'State_ABBR'),
-                    z: unpack(rows, 'Coal_Consumption_2014_all_sectors_(thousand_tons)'),
-                    text: unpack(rows, 'State_LOWER'),
-                    zmin: 0,
-                    zmax: 17000,
-                    colorscale: [
-                        [0, 'rgb(242,240,247)'], [0.2, 'rgb(218,218,235)'],
-                        [0.4, 'rgb(188,189,220)'], [0.6, 'rgb(158,154,200)'],
-                        [0.8, 'rgb(117,107,177)'], [1, 'rgb(84,39,143)']
-                    ],
-                    colorbar: {
-                        title: 'Thousand of Tons',
-                        thickness: 0.2
-                    },
-                    marker: {
-                        line:{
-                            color: 'rgb(255,255,255)',
-                            width: 2
-                        }
-                    }
-                }];
+var dataURL = "http://127.0.0.1:5000/api/v1.0/USProductionConsumption";
+
+d3.json(dataURL).then(function(data) {
+    data.forEach(function(name) {
+        console.log(name.State_lower_name);
+        var State_lower_name = name.State_lower_name;
+        var Coal_Consumption_2014_all_sectors_thousand_tons = name.Coal_Consumption_2014_all_sectors_thousand_tons;
+      });
+    var data1 = [{
+        type: 'choropleth',
+        locationmode: 'USA-states',
+        locations: State_lower_name,
+        z: Coal_Consumption_2014_all_sectors_thousand_tons,
+        text: State_lower_name,
+        zmin: 0,
+        zmax: 17000,
+        colorscale: [
+            [0, 'rgb(242,240,247)'], [0.2, 'rgb(218,218,235)'],
+            [0.4, 'rgb(188,189,220)'], [0.6, 'rgb(158,154,200)'],
+            [0.8, 'rgb(117,107,177)'], [1, 'rgb(84,39,143)']
+        ],
+        colorbar: {
+            title: 'Thousand of Tons',
+            thickness: 0.2
+        },
+        marker: {
+            line:{
+                color: 'rgb(255,255,255)',
+                width: 2
+            }
+        }
+    }];
 
 
-                var layout1 = {
-                    title: 'Coal Consumption 2014',
-                    geo:{
-                        scope: 'usa',
-                        showlakes: true,
-                        lakecolor: 'rgb(255,255,255)'
-                    }
-                };
+    var layout1 = {
+        title: 'Coal Consumption 2014',
+        geo:{
+            scope: 'usa',
+            showlakes: true,
+            lakecolor: 'rgb(255,255,255)'
+        }
+    };
 
-                Plotly.plot(myDiv, data1, layout1, {showLink: false});
-            });
+    Plotly.plot(myDiv, data1, layout1, {showLink: false});
+});
 
 d3.selectAll("h2")
     .on("click", function(){

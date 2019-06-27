@@ -274,6 +274,7 @@ def priceDifferences():
 @app.route("/api/v1.0/USProductionConsumption")
 def query():
     myresultstoo_again = session.query(UsProductionConsumption.State_lower_name,
+                            UsProductionConsumption.State_abbr_name,
                             UsProductionConsumption.Coal_Consumption_2018_all_sectors_thousand_tons,
                             UsProductionConsumption.Coal_Consumption_2014_all_sectors_thousand_tons,
                             UsProductionConsumption.Production_US_Share, 
@@ -286,9 +287,10 @@ def query():
     #return(myresultstoo_again)
     us_production_consumption = []
     
-    for State_lower_name, Coal_Consumption_2018_all_sectors_thousand_tons, Coal_Consumption_2014_all_sectors_thousand_tons, Production_US_Share, Production_Rank, Consumption_per_Capita_Million_Btu, Consumption_per_Capita_Rank, Expenditures_per_Capita_Dollars, Expenditures_per_Capita_Rank in myresultstoo_again:
+    for State_lower_name, State_abbr_name, Coal_Consumption_2018_all_sectors_thousand_tons, Coal_Consumption_2014_all_sectors_thousand_tons, Production_US_Share, Production_Rank, Consumption_per_Capita_Million_Btu, Consumption_per_Capita_Rank, Expenditures_per_Capita_Dollars, Expenditures_per_Capita_Rank in myresultstoo_again:
         us_production_consumption_dict = {}
         us_production_consumption_dict["State_lower_name"] = State_lower_name
+        us_production_consumption_dict["State_abbr_name"] = State_abbr_name
         us_production_consumption_dict["Coal_Consumption_2018_all_sectors_thousand_tons"] = Coal_Consumption_2018_all_sectors_thousand_tons
         us_production_consumption_dict["Coal_Consumption_2014_all_sectors_thousand_tons"] = Coal_Consumption_2014_all_sectors_thousand_tons
         us_production_consumption_dict["Production_US_Share"] = Production_US_Share
