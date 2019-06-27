@@ -31,7 +31,7 @@ function flyToLocation(Location) {
   } else if (Location == "IL") {
     var lon = -89.30131;
     var lat = 39.84215;
-    var zoom = 1400000.0
+    var zoom = 1440000.0
     var adjustLatitude = 2.65;
   } else if (Location == "KY") {
     var lon = -85.7700;
