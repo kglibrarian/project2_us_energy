@@ -60,7 +60,7 @@ def home():
     return render_template("index.html")
 
 @app.route("/illinois")
-def mina():
+def Illinois():
     return render_template("Illinois.html")
 
 @app.route("/kentucky")
