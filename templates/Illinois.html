@@ -3,140 +3,120 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Illinois State Dashboard</title>
-		<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+		<link rel="stylesheet" type="text/css" href="static/css/style.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-        <script src="https://cesiumjs.org/releases/1.58/Build/Cesium/Cesium.js"></script>
-        <link href="https://cesiumjs.org/releases/1.58/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-        
-        <!-- Bootstrap -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="../static/js/illinois.js"></script>
-        <!-- Bootstrap end-->
-  </head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="https://cesiumjs.org/releases/1.58/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesiumjs.org/releases/1.58/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 
-    
+          <!-- Bootstrap -->
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+          
+          <!-- Bootstrap end-->
+
+          <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+          <link rel="manifest" href="/site.webmanifest"> -->
+
+  </head>
+  
 	<body>
-    <!-- NavBar from Bootstrap -->
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>                        
-          </button>
-          <!-- <a class="navbar-brand" href="#">Logo</a> -->
-        </div>
-        
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ url_for('.home') }}">Home</a></li>    
-                <li><a href="{{ url_for('.Illinois') }}">Illinois</a></li>
-                <li><a href="{{ url_for('.Texas') }}">Texas</a></li>
-                <li><a href="{{ url_for('.Kentucky') }}">Kentucky</a></li>
-                <li><a href="{{ url_for('.About') }}">About</a></li>
-            </ul>
-          <!-- <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          </ul> -->
-        </div>
+<!-- Head from Bootstrap -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <!-- <a class="navbar-brand" href="#">Logo</a> -->
       </div>
-    </nav>
-    <!-- End Nav Bar -->
+      
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="{{ url_for('.home') }}">Home</a></li>
+          <li class="active"><a href="{{ url_for('.Illinois') }}">Illinois</a></li>
+          <li><a href="{{ url_for('.Texas') }}">Texas</a></li>
+          <li><a href="{{ url_for('.Kentucky') }}">Kentucky</a></li>
+          <li><a href="{{ url_for('.About') }}">About</a></li>
+        </ul>
+        <!-- <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul> -->
+      </div>
+    </div>
+  </nav>
+  <!-- Header end -->
 
 		<div class="container">
             <div class="row">
               <div class="col-xs-12 col-md-12">
                 <h1>Illinois Data Dashboard</h1>
-              </div>
             </div>
+        </div>
+        
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
 
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
-          <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-          <script type="text/javascript" src="../static/js/illinois.js"></script>
-          <script type="text/javascript" src="../static/js/app(brickey).js"></script>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
 
-          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-          <link rel="manifest" href="/site.webmanifest">
+                  <div id="cesiumContainer"></div>
+                  <script>
+                    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzN2M3YTE2YS1kOTU3LTRhMzQtYWU4Ni02YTIyYmNhODc4MTciLCJpZCI6MTI1MjUsInNjb3BlcyI6WyJhc2wiLCJhc3IiLCJhc3ciLCJnYyJdLCJpYXQiOjE1NjEyMjIzODR9.jfV2uxgm2xI3e8Sc2k6cyx2oaR9QnJtncIuNRNt3Q8k';
+                    var Location = "IL";
+                    
 
+                  </script>
+               
+              </div>
+              
+          </div>
+        
+         
+        </div>
+        <div class="container text-center">
+            <p>Illinois power plant locations - marker size represents 2017 power output (kV).</p>
+        </div>
+        
+        <div class="container text-center">    
+          <div>
+            <h3 class="fun-facts">ILLINOIS QUICK FACTS</h3><br>
+            <ul>
+              <li>Illinois is the fifth-largest energy-consuming state in the nation, and its industrial sector, which includes petroleum refining and coal mining, uses the most energy of any end-use sector in the state.</li>
+              <li>Illinois ranked first in the nation in 2018 in net electricity generation from nuclear power, and the state's six nuclear plants accounted for 12% of U.S. nuclear power generation.</li>
+            </ul>
+          </div>        
+          <div class="row">
+            <div class="col-sm-6">
+              <div id="pie"></div>
+              </div>
+            <div class="col-sm-6"> 
+                <div id="line-elec"></div>
+            </div>
+        
+            <div class="col-sm-6">
+              <div id="line-cons"></div>
+            </div>
+            <div class="col-sm-6"> 
+                <div id="line-prod"></div>
+            </div>
+          </div>
+        </div><br>
+        
+        <footer class="container-fluid text-center">
+          <p>&copy; 2019 // Karen Gutzman, Mina Imoto, Brickey LeQuire, and Marc Palomo</p>
+        </footer>
 
-
-<div id="cesiumContainer" style="width: 700px; height:400px"></div>
-<script>
-  var Location = "IL";
-  Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyMGZjYzI5OS0wZDQ2LTRkMTctOGY0Yi1lZWE3Y2U4ZTQ5ZDEiLCJpZCI6MTI1MjUsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1NjEyMjIwMjl9.swoqaLkpdCJ0g8USzCJr_z5k1md3UvPdpMqleOUHyL4';
-  var viewer = new Cesium.Viewer('cesiumContainer');
-</script>
-
-
-
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <img src="https://placehold.it/1200x400?text=IMAGE" alt="Image">
-        <div class="carousel-caption">
-          <h3>Sell $</h3>
-          <p>Money Money.</p>
-        </div>      
-      </div>
-
-      <div class="item">
-        <img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image">
-        <div class="carousel-caption">
-          <h3>More Sell $</h3>
-          <p>Lorem ipsum...</p>
-        </div>      
-      </div>
-    </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-</div>
-  
-<div class="container text-center">    
-  <h3>QUICK FACTS</h3><br>
-  <P>DESCRIPTION HERE</P>
-  <div class="row">
-    <div class="col-sm-6">
-      <div id="pie"></div>
-      </div>
-    <div class="col-sm-6"> 
-        <div id="line-elec"></div>
-    </div>
-
-    <div class="col-sm-6">
-      <div id="line-cons"></div>
-    </div>
-    <div class="col-sm-6"> 
-        <div id="line-prod"></div>
-    </div>
-  </div>
-</div><br>
-
-<footer class="container-fluid text-center">
-  <p>Northwestern University Boot Camp</p>
-</footer>
-
-</body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script type="text/javascript" src="../static/js/illinois.js"></script>
+        <script type="text/javascript" src="../static/js/app_brickey.js"></script>
+    </body>
 </html>
