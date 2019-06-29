@@ -4,7 +4,7 @@ function buildCharts(sample) {
   // @TODO: Use `d3.json` to fetch the sample data for the plots
   var chartsURL = "/api/v1.0/consumptionsector";
   d3.json(chartsURL).then(function (data) {
-    var data = data[2]; 
+    var data = data[1]; 
     ind_key = Object.keys(data);
     ind_val = Object.values(data);
     
@@ -36,7 +36,7 @@ function buildLineCharts(sample) {
   // @TODO: Use `d3.json` to fetch the sample data for the plots
   var chartsURL = "/api/v1.0/electricityGeneration";
   d3.json(chartsURL).then(function (data) {
-    var data_line = data[2]; 
+    var data_line = data[1]; 
     ind_key_line = Object.keys(data_line);
     ind_val_line = Object.values(data_line);
   
@@ -78,7 +78,7 @@ function buildConsumptionCharts(sample) {
   // @TODO: Use `d3.json` to fetch the sample data for the plots
   var chartsURL = "/api/v1.0/energyConsumption";
   d3.json(chartsURL).then(function (data) {
-    var data_line = data[2]; 
+    var data_line = data[1]; 
     ind_key_line = Object.keys(data_line);
     ind_val_line = Object.values(data_line);
   
@@ -119,7 +119,7 @@ function buildProductionCharts(sample) {
   // @TODO: Use `d3.json` to fetch the sample data for the plots
   var chartsURL = "/api/v1.0/energyProduction";
   d3.json(chartsURL).then(function (data) {
-    var data_line = data[2]; 
+    var data_line = data[1]; 
     ind_key_line = Object.keys(data_line);
     ind_val_line = Object.values(data_line);
   
@@ -163,7 +163,7 @@ function buildPriceCharts(sample) {
   // @TODO: Use `d3.json` to fetch the sample data for the plots
   var chartsURL = "/api/v1.0/priceDifferences";
   d3.json(chartsURL).then(function (data) {
-    var data_line = data[2]; 
+    var data_line = data[1]; 
     ind_key_line = Object.keys(data_line);
     ind_val_line = Object.values(data_line);
   
