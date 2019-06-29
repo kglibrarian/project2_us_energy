@@ -114,51 +114,51 @@ function buildConsumptionCharts(sample) {
 }
 buildConsumptionCharts();
 
-// Kentucky-LineChart (Production)
-function buildProductionCharts(sample) {
-  // @TODO: Use `d3.json` to fetch the sample data for the plots
-  var chartsURL = "/api/v1.0/energyProduction";
-  d3.json(chartsURL).then(function (data) {
-    var data_line = data[1]; 
-    ind_key_line = Object.keys(data_line);
-    ind_val_line = Object.values(data_line);
+// // Kentucky-LineChart (Production)
+// function buildProductionCharts(sample) {
+//   // @TODO: Use `d3.json` to fetch the sample data for the plots
+//   var chartsURL = "/api/v1.0/energyProduction";
+//   d3.json(chartsURL).then(function (data) {
+//     var data_line = data[1]; 
+//     ind_key_line = Object.keys(data_line);
+//     ind_val_line = Object.values(data_line);
   
-    var chart = [{
-      x: ind_val_line,
-      y: ind_key_line,
-      type: 'bar',
-      orientation: 'h',
-      title: "Kentucky Production Estimates, 2016"
-    }];
+//     var chart = [{
+//       x: ind_val_line,
+//       y: ind_key_line,
+//       type: 'bar',
+//       orientation: 'h',
+//       title: "Kentucky Production Estimates, 2016"
+//     }];
 
-    var layout = {
-      autosize: true,
-      yaxis: {
-        automargin: true
-      },
-      title: {
-        text: 'Energy Production Estimates, 2016',
-        font: {
-        size: 17
-        },
-      },
-      xaxis: {
-        title: 'Trillion Btu',
-        titlefont: {
-          size: 10,
-        },
-        showticklabels: true,
-      }
-    };
+//     var layout = {
+//       autosize: true,
+//       yaxis: {
+//         automargin: true
+//       },
+//       title: {
+//         text: 'Energy Production Estimates, 2016',
+//         font: {
+//         size: 17
+//         },
+//       },
+//       xaxis: {
+//         title: 'Trillion Btu',
+//         titlefont: {
+//           size: 10,
+//         },
+//         showticklabels: true,
+//       }
+//     };
 
-    Plotly.newPlot('line-prod', chart, layout);
-    });
-}
-buildProductionCharts();
+//     Plotly.newPlot('line-prod', chart, layout);
+//     });
+// }
+// buildProductionCharts();
 
 
 
-// Kentucky-LineChart (Production)
+// Kentucky-LineChart (Price)
 function buildPriceCharts(sample) {
   // @TODO: Use `d3.json` to fetch the sample data for the plots
   var chartsURL = "/api/v1.0/priceDifferences";
@@ -181,7 +181,7 @@ function buildPriceCharts(sample) {
         automargin: true
       },
       title: {
-        text: 'Energy Production Estimates, 2016',
+        text: 'Price Differences from U.S Average, <br> Most Recent Monthly',
         font: {
         size: 17
         },
@@ -195,7 +195,7 @@ function buildPriceCharts(sample) {
       }
     };
 
-    Plotly.newPlot('line-prod', chart, layout);
+    Plotly.newPlot('line-price', chart, layout);
     });
 }
 buildPriceCharts();

@@ -160,7 +160,7 @@ buildProductionCharts();
 
 
 
-// Illinois-LineChart (Production)
+// Illinois-LineChart (Price)
 function buildPriceCharts(sample) {
   // @TODO: Use `d3.json` to fetch the sample data for the plots
   var chartsURL = "/api/v1.0/priceDifferences";
@@ -183,7 +183,7 @@ function buildPriceCharts(sample) {
         automargin: true
       },
       title: {
-        text: 'Energy Production Estimates, 2016',
+        text: 'Price Differences from U.S Average, <br> Most Recent Monthly',
         font: {
         size: 17
         },
