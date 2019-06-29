@@ -7,25 +7,26 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
     <script src="https://cesiumjs.org/releases/1.58/Build/Cesium/Cesium.js"></script>
-    <link href="https://cesiumjs.org/releases/1.58/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <link href="https://cesiumjs.org/releases/1.58/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 
-  <!-- Bootstrap -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <!-- Bootstrap end-->
+          <!-- Bootstrap -->
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+          
+          <!-- Bootstrap end-->
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
+          <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+          <link rel="manifest" href="/site.webmanifest"> -->
 
-</head>
+  </head>
   
-<body>
-<!-- Begin Nav from Bootstrap -->
-  <nav class="navbar navbar-inverse">
+	<body>
+<!-- Head from Bootstrap -->
+<nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -38,10 +39,10 @@
       
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="{{ url_for('.home') }}">Home</a></li>
+          <li><a href="{{ url_for('.home') }}">Home</a></li>
           <li><a href="{{ url_for('.Illinois') }}">Illinois</a></li>
           <li><a href="{{ url_for('.Texas') }}">Texas</a></li>
-          <li><a href="{{ url_for('.Kentucky') }}">Kentucky</a></li>
+          <li class="active"><a href="{{ url_for('.Kentucky') }}">Kentucky</a></li>
           <li><a href="{{ url_for('.About') }}">About</a></li>
         </ul>
         <!-- <ul class="nav navbar-nav navbar-right">
@@ -50,45 +51,58 @@
       </div>
     </div>
   </nav>
-  <!-- End Nav Here -->
+  <!-- Header end -->
 
 		<div class="container">
-        <div class="row">
+            <div class="row">
               <div class="col-xs-12 col-md-12">
                 <h1>Kentucky Data Dashboard</h1>
-              </div>
-
+            </div>
         </div>
-    </div>
         
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
 
-    <!-- Wrapper for slides -->
-      <div class="carousel-inner">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
 
-        <div id="cesiumContainer"></div>
-        <script>
-          Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzN2M3YTE2YS1kOTU3LTRhMzQtYWU4Ni02YTIyYmNhODc4MTciLCJpZCI6MTI1MjUsInNjb3BlcyI6WyJhc2wiLCJhc3IiLCJhc3ciLCJnYyJdLCJpYXQiOjE1NjEyMjIzODR9.jfV2uxgm2xI3e8Sc2k6cyx2oaR9QnJtncIuNRNt3Q8k';
-          var Location = "KY";
-        </script>
-                  
-      </div>
+                  <div id="cesiumContainer"></div>
+                  <script>
+                    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzN2M3YTE2YS1kOTU3LTRhMzQtYWU4Ni02YTIyYmNhODc4MTciLCJpZCI6MTI1MjUsInNjb3BlcyI6WyJhc2wiLCJhc3IiLCJhc3ciLCJnYyJdLCJpYXQiOjE1NjEyMjIzODR9.jfV2uxgm2xI3e8Sc2k6cyx2oaR9QnJtncIuNRNt3Q8k';
+                    var Location = "KY";
+                    
+
+                  </script>
+               
+              </div>
+              
+          </div>
         
-    </div>
+         
+        </div>
+        <div class="container text-center">
+            <p>Kentucky power plant locations - marker size represents 2017 power output (kV).</p>
+        </div>
         
-            
-   </div>
-          
         <div class="container text-center">    
+<<<<<<< HEAD
           <h3 class="fun-facts">QUICK FACTS ABOUT KENTUCKY</h3><br>
           <p>
             In 2018, about 75% of Kentucky's net electricity generation was coal-fired, the third-largest share of any state after West Virginia and Wyoming. 
             Hydroelectric power provides nearly all of Kentucky's renewable electricity generation, and in 2018 about 6% of the state’s electricity was produced at nine hydropower dams.
 
           </p>
+=======
+          <div>
+            <h3 class="fun-facts">KENTUCKY QUICK FACTS</h3><br>
+            <ul>
+              <li>In 2018, about 75% of Kentucky's net electricity generation was coal-fired, the third-largest share of any state after West Virginia and Wyoming.</li> 
+              <li>Hydroelectric power provides nearly all of Kentucky's renewable electricity generation, and in 2018 about 6% of the state’s electricity was produced at nine hydropower dams.</li>
+            </ul>
+          </div>        
+>>>>>>> da703c52a7d0a996126f91295804efd4682e1d92
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6 ">
               <div id="pie"></div>
               </div>
             <div class="col-sm-6"> 
@@ -111,7 +125,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-        <script type="text/javascript" src="../static/js/kentucky.js"></script>
+        <script type="text/javascript" src="../static/js/Kentucky.js"></script>
         <script type="text/javascript" src="../static/js/app_brickey.js"></script>
     </body>
 </html>
