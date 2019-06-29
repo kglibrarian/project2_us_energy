@@ -24,12 +24,14 @@ function buildCharts(sample) {
       },
     };
     
-    
-
     Plotly.newPlot('pie', chart, layout); 
     });
   }
 buildCharts();
+
+function modify (){
+document.getElementByClassName('legend').setAttribute("font-weight", "normal");
+}
 
 // Illinois-LineChart (Electricity)
 function buildLineCharts(sample) {
